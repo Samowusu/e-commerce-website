@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { CartIcon } from "../../assets/svgs/CartIcon";
 import { ShopIcon } from "../../assets/svgs/ShopIcon";
 import { Typography } from "../commons/Typography";
-import { Header } from "../header";
+import { Header } from "../header/Header";
 import { NavBar } from "../header/NavBar";
+import { ProductCard } from "../product/ProductCard";
 import { Playground } from "./Playground";
 
 export class Glossary extends Component {
@@ -16,6 +17,7 @@ export class Glossary extends Component {
         <ShopIcon />
         <CartIcon />
         <Header />
+        <ProductCard />
       </>
     );
   }

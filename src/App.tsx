@@ -2,7 +2,6 @@ import { Component, ReactNode } from "react";
 import { GlobalStyles } from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { Typography } from "./components/commons/Typography";
-import { Header } from "./components/header";
 import { theme } from "./config/theme";
 import { Glossary } from "./components/glossary/Glossary";
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 type StyleProps = Partial<Props>;
 const Box = styled.div<StyleProps>`
   display: flex;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: ${({ width }) => width ?? "100%"};
   max-width: ${({ maxWidth }) => maxWidth ?? ""};
   min-width: ${({ minWidth }) => minWidth ?? ""};
@@ -14,15 +14,34 @@ const Box = styled.div<StyleProps>`
   align-items: ${({ alignItems }) => alignItems ?? ""};
 
   /* padding vertical */
-  padding: ${({ pV }) => pV ?? ""} ${({ pV }) => (pV ? 0 : "")};
+  padding: ${({ pV }) => pV ?? ""} ${({ pV, pH }) => (pV ? pH ?? 0 : "")};
 
   /* padding horizontal */
-  padding: ${({ pH }) => (pH ? 0 : "")} ${({ pH }) => pH ?? ""};
+  padding: ${({ pH, pV }) => (pH ? pV ?? 0 : "")} ${({ pH }) => pH ?? ""};
 
   padding-top: ${({ paddingTop }) => paddingTop ?? ""};
   padding-bottom: ${({ paddingBottom }) => paddingBottom ?? ""};
   padding-right: ${({ paddingRight }) => paddingRight ?? ""};
   padding-left: ${({ paddingLeft }) => paddingLeft ?? ""};
+
+  /* margin vertical */
+  margin: ${({ mV }) => mV ?? ""} ${({ mV, mH }) => (mV ? mH ?? 0 : "")};
+
+  /* margin horizontal */
+  margin: ${({ mH, mV }) => (mH ? mV ?? 0 : "")} ${({ mH }) => mH ?? ""};
+
+  margin-top: ${({ marginTop }) => marginTop ?? ""};
+  margin-bottom: ${({ marginBottom }) => marginBottom ?? ""};
+  margin-right: ${({ margintRight }) => margintRight ?? ""};
+  margin-left: ${({ marginLeft }) => marginLeft ?? ""};
+
+  position: ${({ position }) => position ?? ""};
+  top: ${({ top }) => top ?? ""};
+  bottom: ${({ bottom }) => bottom ?? ""};
+  right: ${({ right }) => right ?? ""};
+  left: ${({ left }) => left ?? ""};
+  z-index: ${({ zIndex }) => zIndex ?? ""};
+  gap: ${({ gap }) => gap ?? ""};
 `;
 
 interface Props {
@@ -40,6 +59,21 @@ interface Props {
   pV?: string;
   pH?: string; //pV and pH stand for padding vertical and padding horizontal respectively
   height?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  margintRight?: string;
+  marginLeft?: string;
+  mH?: string;
+  mV?: string; //mH and mV stand for margin horizontal and margin vertical respectively
+  position?: string;
+  top?: string;
+  bottom?: string;
+  right?: string;
+  left?: string;
+  zIndex?: string;
+  gap?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 export class Container extends Component<Props> {
   render() {
@@ -58,6 +92,21 @@ export class Container extends Component<Props> {
         pV={this.props.pV}
         pH={this.props.pH}
         height={this.props.height}
+        marginBottom={this.props.marginBottom}
+        marginTop={this.props.marginTop}
+        margintRight={this.props.margintRight}
+        marginLeft={this.props.marginLeft}
+        mH={this.props.mH}
+        mV={this.props.mV}
+        position={this.props.position}
+        top={this.props.top}
+        bottom={this.props.bottom}
+        right={this.props.right}
+        left={this.props.left}
+        zIndex={this.props.zIndex}
+        gap={this.props.gap}
+        onMouseEnter={this.props.onMouseEnter}
+        onMouseLeave={this.props.onMouseLeave}
       >
         {this.props.children}
       </Box>

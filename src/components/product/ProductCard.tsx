@@ -9,8 +9,17 @@ interface ProductCardState {
   isHovering: boolean;
 }
 
-interface ProductCardProps {}
+interface ProductCardProps {
+  productName?: string;
+  productPrice?: string;
+}
+
 export class ProductCard extends Component<ProductCardProps, ProductCardState> {
+  static defaultProps: ProductCardProps = {
+    productName: "apollo running shorts",
+    productPrice: "$50.00",
+  };
+
   state: Readonly<ProductCardState> = {
     isHovering: false,
   };
@@ -39,6 +48,8 @@ export class ProductCard extends Component<ProductCardProps, ProductCardState> {
           flexDirection="column"
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          padding="10px"
+          boxShadow={this.state.isHovering && true}
         >
           <Container width="100%" position="relative">
             <img src={shirt} alt="a shirt" />
@@ -60,13 +71,13 @@ export class ProductCard extends Component<ProductCardProps, ProductCardState> {
               fontSize={theme.fontSize.m}
               fontWeight={theme.fontWeight.veryLight}
             >
-              Apollo Running Shorts
+              {this.props.productName}
             </Typography>
             <Typography
               fontSize={theme.fontSize.m}
               fontWeight={theme.fontWeight.bold}
             >
-              $50.00
+              {this.props.productPrice}
             </Typography>
           </Container>
         </Container>

@@ -1,19 +1,23 @@
-import React, { Children, Component, ReactNode } from "react";
+import React, { Component, ReactNode } from "react";
 import styled from "styled-components";
 
 type StyleProps = Partial<Props>;
 const Box = styled.div<StyleProps>`
   display: flex;
-  /* border: 1px solid red; */
+  border: ${({ border }) => border && "1px solid red"};
+  border-radius: ${({ borderRadius }) => borderRadius ?? ""};
+  background: ${({ bg }) => bg ?? "transparent"};
   width: ${({ width }) => width ?? "100%"};
   max-width: ${({ maxWidth }) => maxWidth ?? ""};
   min-width: ${({ minWidth }) => minWidth ?? ""};
   height: ${({ height }) => height ?? ""};
+  max-height: ${({ maxHeight }) => maxHeight ?? ""};
   flex-direction: ${({ flexDirection }) => flexDirection ?? "row"};
   justify-content: ${({ justifyContent }) => justifyContent ?? ""};
   align-items: ${({ alignItems }) => alignItems ?? ""};
 
   /* padding vertical */
+  padding: ${({ padding }) => padding ?? ""};
   padding: ${({ pV }) => pV ?? ""} ${({ pV, pH }) => (pV ? pH ?? 0 : "")};
 
   /* padding horizontal */
@@ -25,6 +29,7 @@ const Box = styled.div<StyleProps>`
   padding-left: ${({ paddingLeft }) => paddingLeft ?? ""};
 
   /* margin vertical */
+  margin: ${({ margin }) => margin ?? ""};
   margin: ${({ mV }) => mV ?? ""} ${({ mV, mH }) => (mV ? mH ?? 0 : "")};
 
   /* margin horizontal */
@@ -42,6 +47,39 @@ const Box = styled.div<StyleProps>`
   left: ${({ left }) => left ?? ""};
   z-index: ${({ zIndex }) => zIndex ?? ""};
   gap: ${({ gap }) => gap ?? ""};
+
+  overflow: ${({ overflow }) => overflow ?? ""};
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  & ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* box-shadow: ${({ boxShadow }) =>
+    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""};
+  -webkit-box-shadow: ${({ boxShadow }) =>
+    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""};
+  -moz-box-shadow: ${({ boxShadow }) =>
+    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""}; */
+
+  /* box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19);
+  -webkit-box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19);
+  -moz-box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19); */
+
+  box-shadow: ${({ boxShadow }) =>
+    boxShadow && "1px 3px 9px 13px rgba(168, 172, 176, 0.15)"};
+  -webkit-box-shadow: ${({ boxShadow }) =>
+    boxShadow && "1px 3px 9px 13px rgba(168, 172, 176, 0.15)"};
+  -moz-box-shadow: ${({ boxShadow }) =>
+    boxShadow && "1px 3px 9px 13px rgba(168, 172, 176, 0.15)"};
+
+  ${({ hover, theme }) =>
+    hover
+      ? `&:hover { background: ${theme.colors.lightGrey}  ; cursor: pointer}`
+      : ""}
 `;
 
 interface Props {
@@ -59,6 +97,7 @@ interface Props {
   pV?: string;
   pH?: string; //pV and pH stand for padding vertical and padding horizontal respectively
   height?: string;
+  maxHeight?: string;
   marginTop?: string;
   marginBottom?: string;
   margintRight?: string;
@@ -71,9 +110,17 @@ interface Props {
   right?: string;
   left?: string;
   zIndex?: string;
+  padding?: string;
+  margin?: string;
+  boxShadow?: boolean;
+  overflow?: string;
   gap?: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  border?: boolean;
+  borderRadius?: string;
+  bg?: string;
+  hover?: boolean;
 }
 export class Container extends Component<Props> {
   render() {
@@ -92,6 +139,7 @@ export class Container extends Component<Props> {
         pV={this.props.pV}
         pH={this.props.pH}
         height={this.props.height}
+        maxHeight={this.props.maxHeight}
         marginBottom={this.props.marginBottom}
         marginTop={this.props.marginTop}
         margintRight={this.props.margintRight}
@@ -104,9 +152,17 @@ export class Container extends Component<Props> {
         right={this.props.right}
         left={this.props.left}
         zIndex={this.props.zIndex}
+        boxShadow={this.props.boxShadow}
+        overflow={this.props.overflow}
+        padding={this.props.padding}
+        margin={this.props.margin}
         gap={this.props.gap}
+        border={this.props.border}
         onMouseEnter={this.props.onMouseEnter}
         onMouseLeave={this.props.onMouseLeave}
+        hover={this.props.hover}
+        borderRadius={this.props.borderRadius}
+        bg={this.props.bg}
       >
         {this.props.children}
       </Box>

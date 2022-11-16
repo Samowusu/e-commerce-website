@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Typography } from "../commons/Typography";
 import { theme } from "../../config/theme";
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
 const Nav = styled.nav`
   /* border: 1px solid black; */
   width: clamp(250px, 30%, 300px);
@@ -18,15 +18,25 @@ const UL = styled.ul`
   list-style: none;
 `;
 
-const LI = styled.li`
+const Link = styled(NavLink).attrs((props) => ({
+  style: props.style,
+}))`
   /* border: 1px solid green; */
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding-bottom: 30px;
-  /* border-bottom: 3px solid ${({ theme }) => theme.colors.secondaryText}; */
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.primaryText};
+
   &:hover {
+    border-bottom: 3px solid ${({ theme }) => theme.colors.secondaryText};
+  }
+
+  &:focus,
+  &:active {
+    color: ${({ theme }) => theme.colors.secondaryText};
     border-bottom: 3px solid ${({ theme }) => theme.colors.secondaryText};
   }
 `;
@@ -36,26 +46,51 @@ export class NavBar extends Component {
     return (
       <Nav>
         <UL>
-          <LI>
-            <a>
-              <Typography
-                textTransform="uppercase"
-                color={theme.colors.secondaryText}
-              >
-                Women
-              </Typography>
-            </a>
-          </LI>
-          <LI>
-            <a>
-              <Typography textTransform="uppercase">Men</Typography>
-            </a>
-          </LI>
-          <LI>
-            <a>
-              <Typography textTransform="uppercase">Kids</Typography>
-            </a>
-          </LI>
+          <li>
+            <Link
+              to={"/"}
+              style={({ isActive }) => {
+                return isActive
+                  ? {
+                      color: theme.colors.secondaryText,
+                      borderBottom: `3px solid ${theme.colors.secondaryText}`,
+                    }
+                  : {};
+              }}
+            >
+              WOMEN
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/men"}
+              style={({ isActive }) => {
+                return isActive
+                  ? {
+                      color: theme.colors.secondaryText,
+                      borderBottom: `3px solid ${theme.colors.secondaryText}`,
+                    }
+                  : {};
+              }}
+            >
+              MEN
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/kids"
+              style={({ isActive }) => {
+                return isActive
+                  ? {
+                      color: theme.colors.secondaryText,
+                      borderBottom: `3px solid ${theme.colors.secondaryText}`,
+                    }
+                  : {};
+              }}
+            >
+              KIDS
+            </Link>
+          </li>
         </UL>
       </Nav>
     );

@@ -1,4 +1,42 @@
-export const theme = {
+import "styled-components";
+import { DefaultTheme } from "styled-components";
+
+declare module "styled-components" {
+  interface DefaultTheme {
+    colors: {
+      primaryText: string;
+      secondaryText: string;
+      faintText: string;
+      primaryBackground: string;
+      grey: string;
+      black: string;
+      green: string;
+      blue: string;
+      orange: string;
+      lightGrey: string;
+    };
+
+    fontSize: {
+      xxxl: string;
+      xxl: string;
+      xl: string;
+      l: string;
+      m: string;
+      s: string;
+      vs: string;
+    };
+
+    fontWeight: {
+      veryBold: string;
+      bold: string;
+      normal: string;
+      light: string;
+      veryLight: string;
+    };
+  }
+}
+
+export const theme: DefaultTheme = {
   colors: {
     primaryText: "#1D1F22",
     secondaryText: "#5ECE7B",

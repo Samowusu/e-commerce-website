@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 type StyleProps = Partial<Props>;
 const CustomButton = styled.button<StyleProps>`
-  border: 1px solid;
-  border-color: ${({ borderColor }) => borderColor ?? "blue"};
+  border: ${({ border }) => (border ? "1px solid red" : "none")};
+
+  border-color: ${({ borderColor }) => borderColor ?? ""};
   width: ${({ width }) => width ?? "100%"};
   max-width: ${({ maxWidth }) => maxWidth ?? "200px"};
   background-color: ${({ bg }) => bg ?? "transparent"};
@@ -59,6 +60,7 @@ interface Props {
   margin?: string;
   borderColor?: string;
   onClick?: () => void;
+  border?: boolean;
 }
 
 export class Button extends Component<Props> {
@@ -84,6 +86,7 @@ export class Button extends Component<Props> {
         mV={this.props.mV}
         margin={this.props.margin}
         borderColor={this.props.borderColor}
+        border={this.props.border}
         onClick={this.props.onClick}
       >
         {this.props.children}

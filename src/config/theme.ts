@@ -14,6 +14,8 @@ declare module "styled-components" {
       blue: string;
       orange: string;
       lightGrey: string;
+      ash: string;
+      modalBackground: string;
     };
 
     fontSize: {
@@ -27,11 +29,11 @@ declare module "styled-components" {
     };
 
     fontWeight: {
-      veryBold: string;
-      bold: string;
-      normal: string;
       light: string;
-      veryLight: string;
+      regular: string;
+      medium: string;
+      semiBold: string;
+      bold: string;
     };
   }
 }
@@ -48,6 +50,8 @@ export const theme: DefaultTheme = {
     blue: "#15A4C3",
     orange: "#EA8120",
     lightGrey: "#EEEEEE",
+    ash: "#E5E5E5",
+    modalBackground: "rgba(57, 55, 72, 0.22)",
   },
 
   fontSize: {
@@ -61,10 +65,10 @@ export const theme: DefaultTheme = {
   },
 
   fontWeight: {
-    veryBold: "700",
-    bold: "600",
-    normal: "500",
-    light: "400",
-    veryLight: "300",
+    light: "300",
+    regular: "400",
+    medium: "500",
+    semiBold: "600",
+    bold: "700",
   },
 };

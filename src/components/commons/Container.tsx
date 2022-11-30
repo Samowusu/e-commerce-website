@@ -5,6 +5,11 @@ type StyleProps = Partial<Props>;
 const Box = styled.div<StyleProps>`
   display: flex;
   border: ${({ border }) => border && "1px solid red"};
+  border-bottom: ${({ borderBottom }) => borderBottom && "1px solid red"};
+  border-top: ${({ borderTop }) => borderTop && "1px solid red"};
+  border-right: ${({ borderRight }) => borderRight ?? ""};
+  border-left: ${({ borderLeft }) => borderLeft ?? ""};
+  border-color: ${({ borderColor }) => borderColor ?? ""};
   border-radius: ${({ borderRadius }) => borderRadius ?? ""};
   background: ${({ bg }) => bg ?? "transparent"};
   width: ${({ width }) => width ?? "100%"};
@@ -118,9 +123,14 @@ interface Props {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   border?: boolean;
+  borderBottom?: boolean;
+  borderTop?: boolean;
+  borderRight?: string;
+  borderLeft?: string;
   borderRadius?: string;
   bg?: string;
   hover?: boolean;
+  borderColor?: string;
 }
 export class Container extends Component<Props> {
   render() {
@@ -162,7 +172,12 @@ export class Container extends Component<Props> {
         onMouseLeave={this.props.onMouseLeave}
         hover={this.props.hover}
         borderRadius={this.props.borderRadius}
+        borderColor={this.props.borderColor}
         bg={this.props.bg}
+        borderBottom={this.props.borderBottom}
+        borderTop={this.props.borderTop}
+        borderRight={this.props.borderRight}
+        borderLeft={this.props.borderLeft}
       >
         {this.props.children}
       </Box>

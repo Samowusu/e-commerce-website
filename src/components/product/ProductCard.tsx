@@ -69,7 +69,7 @@ export class ProductCard extends Component<ProductCardProps, ProductCardState> {
           <Container flexDirection="column" marginTop="25px" gap={"10px"}>
             <Typography
               fontSize={theme.fontSize.m}
-              fontWeight={theme.fontWeight.veryLight}
+              fontWeight={theme.fontWeight.light}
             >
               {this.props.productName}
             </Typography>

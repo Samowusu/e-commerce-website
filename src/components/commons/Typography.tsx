@@ -7,8 +7,9 @@ const Text = styled.p<StyleProps>`
   color: ${({ theme, color }) => color ?? theme.colors.primaryText};
   font-size: ${({ theme, fontSize }) => fontSize ?? theme.fontSize.s};
   font-weight: ${({ theme, fontWeight }) =>
-    fontWeight ?? theme.fontWeight.light};
+    fontWeight ?? theme.fontWeight.regular};
   text-transform: ${({ textTransform }) => textTransform ?? "capitalize"};
+  line-height: ${({ lineHeight }) => lineHeight ?? ""};
 `;
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
   fontSize?: string;
   fontWeight?: string;
   textTransform?: string;
+  lineHeight?: string;
 }
 
 export class Typography extends Component<Props> {
@@ -27,6 +29,7 @@ export class Typography extends Component<Props> {
         color={this.props.color}
         fontSize={this.props.fontSize}
         fontWeight={this.props.fontWeight}
+        lineHeight={this.props.lineHeight}
       >
         {this.props.children}
       </Text>

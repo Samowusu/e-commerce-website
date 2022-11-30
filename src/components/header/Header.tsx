@@ -27,7 +27,7 @@ export class Header extends Component {
           >
             <Typography
               fontSize={theme.fontSize.m}
-              fontWeight={theme.fontWeight.normal}
+              fontWeight={theme.fontWeight.medium}
             >
               $
             </Typography>
@@ -46,7 +46,7 @@ export class Header extends Component {
             >
               <Typography
                 fontSize={theme.fontSize.vs}
-                fontWeight={theme.fontWeight.veryBold}
+                fontWeight={theme.fontWeight.bold}
                 color={theme.colors.primaryBackground}
               >
                 3

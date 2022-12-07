@@ -4,6 +4,7 @@ import styled from "styled-components";
 type StyleProps = Partial<Props>;
 const Box = styled.div<StyleProps>`
   display: flex;
+  flex-wrap: ${({ flexWrap }) => flexWrap ?? ""};
   border: ${({ border }) => border && "1px solid red"};
   border-bottom: ${({ borderBottom }) => borderBottom && "1px solid red"};
   border-top: ${({ borderTop }) => borderTop && "1px solid red"};
@@ -42,7 +43,7 @@ const Box = styled.div<StyleProps>`
 
   margin-top: ${({ marginTop }) => marginTop ?? ""};
   margin-bottom: ${({ marginBottom }) => marginBottom ?? ""};
-  margin-right: ${({ margintRight }) => margintRight ?? ""};
+  margin-right: ${({ marginRight }) => marginRight ?? ""};
   margin-left: ${({ marginLeft }) => marginLeft ?? ""};
 
   position: ${({ position }) => position ?? ""};
@@ -105,7 +106,7 @@ interface Props {
   maxHeight?: string;
   marginTop?: string;
   marginBottom?: string;
-  margintRight?: string;
+  marginRight?: string;
   marginLeft?: string;
   mH?: string;
   mV?: string; //mH and mV stand for margin horizontal and margin vertical respectively
@@ -131,6 +132,8 @@ interface Props {
   bg?: string;
   hover?: boolean;
   borderColor?: string;
+  flexWrap?: string;
+  onClick?: () => void;
 }
 export class Container extends Component<Props> {
   render() {
@@ -152,7 +155,7 @@ export class Container extends Component<Props> {
         maxHeight={this.props.maxHeight}
         marginBottom={this.props.marginBottom}
         marginTop={this.props.marginTop}
-        margintRight={this.props.margintRight}
+        marginRight={this.props.marginRight}
         marginLeft={this.props.marginLeft}
         mH={this.props.mH}
         mV={this.props.mV}
@@ -178,6 +181,8 @@ export class Container extends Component<Props> {
         borderTop={this.props.borderTop}
         borderRight={this.props.borderRight}
         borderLeft={this.props.borderLeft}
+        flexWrap={this.props.flexWrap}
+        onClick={this.props.onClick}
       >
         {this.props.children}
       </Box>

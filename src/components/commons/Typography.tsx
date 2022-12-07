@@ -10,6 +10,18 @@ const Text = styled.p<StyleProps>`
     fontWeight ?? theme.fontWeight.regular};
   text-transform: ${({ textTransform }) => textTransform ?? "capitalize"};
   line-height: ${({ lineHeight }) => lineHeight ?? ""};
+
+  /* margin vertical */
+  margin: ${({ margin }) => margin ?? ""};
+  margin: ${({ mV }) => mV ?? ""} ${({ mV, mH }) => (mV ? mH ?? 0 : "")};
+
+  /* margin horizontal */
+  margin: ${({ mH, mV }) => (mH ? mV ?? 0 : "")} ${({ mH }) => mH ?? ""};
+
+  margin-top: ${({ marginTop }) => marginTop ?? ""};
+  margin-bottom: ${({ marginBottom }) => marginBottom ?? ""};
+  margin-right: ${({ marginRight }) => marginRight ?? ""};
+  margin-left: ${({ marginLeft }) => marginLeft ?? ""};
 `;
 
 interface Props {
@@ -19,6 +31,14 @@ interface Props {
   fontWeight?: string;
   textTransform?: string;
   lineHeight?: string;
+  margin?: string;
+
+  marginTop?: string;
+  marginBottom?: string;
+  marginRight?: string;
+  marginLeft?: string;
+  mH?: string;
+  mV?: string; //mH and mV stand for margin horizontal and margin vertical respectively
 }
 
 export class Typography extends Component<Props> {
@@ -30,6 +50,13 @@ export class Typography extends Component<Props> {
         fontSize={this.props.fontSize}
         fontWeight={this.props.fontWeight}
         lineHeight={this.props.lineHeight}
+        marginBottom={this.props.marginBottom}
+        marginTop={this.props.marginTop}
+        marginRight={this.props.marginRight}
+        marginLeft={this.props.marginLeft}
+        mH={this.props.mH}
+        mV={this.props.mV}
+        margin={this.props.margin}
       >
         {this.props.children}
       </Text>

@@ -8,10 +8,12 @@ import { Button } from "../commons/Button";
 
 interface Props {
   onCheckout?: () => void;
+  onCloseModal?: () => void;
 }
 export class CartOverlay extends Component<Props> {
   static defaultProps: Props = {
     onCheckout: () => console.log("checkout"),
+    onCloseModal: () => console.log("cart Modal is closed"),
   };
 
   render() {
@@ -42,6 +44,7 @@ export class CartOverlay extends Component<Props> {
               pV="15px"
               borderColor={theme.colors.primaryText}
               border
+              onClick={this.props.onCloseModal}
             >
               <Link to={"/cart"}>
                 <Typography

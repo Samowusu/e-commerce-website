@@ -8,6 +8,7 @@ const CustomButton = styled.button<StyleProps>`
   border-color: ${({ borderColor }) => borderColor ?? ""};
   width: ${({ width }) => width ?? "100%"};
   max-width: ${({ maxWidth }) => maxWidth ?? "200px"};
+  height: ${({ height }) => height ?? ""};
   background-color: ${({ bg }) => bg ?? "transparent"};
   color: ${({ color }) => color ?? "black"};
 
@@ -32,7 +33,7 @@ const CustomButton = styled.button<StyleProps>`
 
   margin-top: ${({ marginTop }) => marginTop ?? ""};
   margin-bottom: ${({ marginBottom }) => marginBottom ?? ""};
-  margin-right: ${({ margintRight }) => margintRight ?? ""};
+  margin-right: ${({ marginRight }) => marginRight ?? ""};
   margin-left: ${({ marginLeft }) => marginLeft ?? ""};
 
   cursor: pointer;
@@ -42,6 +43,7 @@ interface Props {
   children: ReactNode;
   bg?: string;
   width?: string;
+  height?: string;
   maxWidth?: string;
   color?: string;
   paddingTop?: string;
@@ -53,7 +55,7 @@ interface Props {
   padding?: string;
   marginTop?: string;
   marginBottom?: string;
-  margintRight?: string;
+  marginRight?: string;
   marginLeft?: string;
   mH?: string;
   mV?: string; //mH and mV stand for margin horizontal and margin vertical respectively
@@ -80,7 +82,7 @@ export class Button extends Component<Props> {
         padding={this.props.padding}
         marginBottom={this.props.marginBottom}
         marginTop={this.props.marginTop}
-        margintRight={this.props.margintRight}
+        marginRight={this.props.marginRight}
         marginLeft={this.props.marginLeft}
         mH={this.props.mH}
         mV={this.props.mV}
@@ -88,6 +90,7 @@ export class Button extends Component<Props> {
         borderColor={this.props.borderColor}
         border={this.props.border}
         onClick={this.props.onClick}
+        height={this.props.height}
       >
         {this.props.children}
       </CustomButton>

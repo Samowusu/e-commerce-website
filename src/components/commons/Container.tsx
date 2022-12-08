@@ -56,6 +56,8 @@ const Box = styled.div<StyleProps>`
 
   overflow: ${({ overflow }) => overflow ?? ""};
   scroll-behavior: smooth;
+  opacity: ${({ opacity }) => opacity ?? ""};
+  cursor: ${({ cursor }) => cursor ?? ""};
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -134,6 +136,8 @@ interface Props {
   borderColor?: string;
   flexWrap?: string;
   onClick?: () => void;
+  opacity?: string;
+  cursor?: string;
 }
 export class Container extends Component<Props> {
   render() {
@@ -183,6 +187,8 @@ export class Container extends Component<Props> {
         borderLeft={this.props.borderLeft}
         flexWrap={this.props.flexWrap}
         onClick={this.props.onClick}
+        opacity={this.props.opacity}
+        cursor={this.props.cursor}
       >
         {this.props.children}
       </Box>

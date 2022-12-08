@@ -58,12 +58,12 @@ export class NavBar extends Component {
                   : {};
               }}
             >
-              WOMEN
+              CLOTHES
             </Link>
           </li>
           <li>
             <Link
-              to={"/men"}
+              to={"/tech"}
               style={({ isActive }) => {
                 return isActive
                   ? {
@@ -73,22 +73,7 @@ export class NavBar extends Component {
                   : {};
               }}
             >
-              MEN
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/kids"
-              style={({ isActive }) => {
-                return isActive
-                  ? {
-                      color: theme.colors.secondaryText,
-                      borderBottom: `3px solid ${theme.colors.secondaryText}`,
-                    }
-                  : {};
-              }}
-            >
-              KIDS
+              TECH
             </Link>
           </li>
         </UL>

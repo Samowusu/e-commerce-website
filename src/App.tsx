@@ -12,11 +12,15 @@ import { Container } from "./components/commons/Container";
 import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
 import CurrencySwitcherCard from "./components/CurrencySwitcherCard";
+import { FETCH_CATEGORIES } from "./graphql/queries";
+import { graphql } from "@apollo/react-hoc";
+import { Query } from "@apollo/react-components";
 
 interface States {
   openModal: boolean;
   showCurrencySwitcherCard: boolean;
 }
+const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);
 interface Props {}
 class App extends Component<Props, States> {
   state: Readonly<States> = {
@@ -45,6 +49,7 @@ class App extends Component<Props, States> {
   };
 
   render(): ReactNode {
+    console.log((this.props as any).data?.category?.products);
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
@@ -59,18 +64,26 @@ class App extends Component<Props, States> {
             onShowCurrencySwitcherCard={this.toggleCurrencySwitcherCardHandler}
           />
         )}
-        <Container border marginTop={headerHeight} paddingTop="50px">
+        <Container border marginTop={headerHeight} pV="50px">
           <CartModal
             modalIsOpen={this.state.openModal}
             onCloseModal={this.closeModalHandler}
           />
           <Routes>
-            <Route path="/" element={<CategoryPage categoryName="Women" />} />
-            <Route path="/men" element={<CategoryPage categoryName="Men" />} />
             <Route
-              path="/kids"
-              element={<CategoryPage categoryName="Kids" />}
+              path="/"
+              element={
+                <CategoryPage
+                  categoryName="clothes"
+                  products={(this.props as any).data?.category?.products}
+                />
+              }
             />
+            <Route
+              path="/tech"
+              element={<CategoryPage categoryName="Tech" />}
+            />
+
             <Route path="/cart" element={<CartPage />} />
             <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>
@@ -80,4 +93,4 @@ class App extends Component<Props, States> {
   }
 }
 
-export default App;
+export default withFetchCategoriesQuery(App);

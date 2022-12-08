@@ -15,8 +15,10 @@ interface ProductCardState {
 interface ProductCardProps {
   dispatch: AppDispatch;
   productName: string;
-  productPrice?: string;
-  currency?: string;
+  productPrice?: number;
+  currencySymbol?: string;
+  image?: string;
+  inStock?: boolean;
 }
 
 class ProductCard extends Component<ProductCardProps, ProductCardState> {
@@ -35,6 +37,8 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
   };
 
   handleMouseEnter = () => {
+    if (!this.props.inStock) return;
+
     this.setState((prevState) => {
       return {
         isHovering: !prevState.isHovering,
@@ -43,6 +47,8 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
   };
 
   handleMouseLeave = () => {
+    if (!this.props.inStock) return;
+
     this.setState((prevState) => {
       return {
         isHovering: !prevState.isHovering,
@@ -56,13 +62,33 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
         <Container
           width="90%"
           flexDirection="column"
+          justifyContent={this.state.isHovering ? "" : "space-between"}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           padding="10px"
           boxShadow={this.state.isHovering ? true : false}
+          position="relative"
+          opacity={this.props.inStock ? "" : "0.4"}
+          cursor={this.props.inStock ? "pointer" : "not-allowed"}
         >
+          {this.props.inStock ? null : (
+            <Container
+              justifyContent="center"
+              position="absolute"
+              top="50%"
+              zIndex="100"
+            >
+              <Typography
+                textTransform="uppercase"
+                color={theme.colors.faintText}
+                fontSize={theme.fontSize.l}
+              >
+                out of stock
+              </Typography>
+            </Container>
+          )}
           <Container width="100%" position="relative">
-            <img src={shirt} alt="a shirt" />
+            <img src={this.props.image} alt="a shirt" />
             {this.state.isHovering && (
               <Container
                 width="fit-content"
@@ -81,14 +107,24 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             <Typography
               fontSize={theme.fontSize.m}
               fontWeight={theme.fontWeight.light}
+              color={
+                this.props.inStock
+                  ? `${theme.colors.primaryText}`
+                  : `${theme.colors.faintText}`
+              }
             >
               {this.props.productName}
             </Typography>
             <Typography
               fontSize={theme.fontSize.m}
               fontWeight={theme.fontWeight.bold}
+              color={
+                this.props.inStock
+                  ? `${theme.colors.primaryText}`
+                  : `${theme.colors.faintText}`
+              }
             >
-              {this.props.currency}
+              {this.props.currencySymbol}
               {this.props.productPrice}
             </Typography>
           </Container>

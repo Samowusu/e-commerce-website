@@ -11,6 +11,10 @@ interface CategoryProps {
   products?: Product[];
 }
 export class CategoryPage extends Component<CategoryProps> {
+  static defaultProps: CategoryProps = {
+    categoryName: "clothes",
+    products: DUMMY_PRODUCTS,
+  };
   render() {
     return (
       <Container justifyContent="center">
@@ -20,14 +24,16 @@ export class CategoryPage extends Component<CategoryProps> {
           </Typography>
           <Container flexWrap="wrap" gap="30px" marginTop="50px">
             {this.props.products?.map(
-              ({ id, name, prices, gallery, inStock }) => (
+              ({ id, name, prices, gallery, inStock, category }) => (
                 <ProductCard
                   key={id}
+                  id={id}
                   productName={name}
                   currencySymbol={prices[0].currency.symbol}
                   productPrice={prices[0].amount}
                   image={gallery[0]}
                   inStock={inStock}
+                  category={category}
                 />
               )
             )}

@@ -11,22 +11,45 @@ import { CartPage } from "./pages/CartPage";
 import { Container } from "./components/commons/Container";
 import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
+import type { Product } from "./config/types";
+import { segragateProductsToCategories } from "./config/utils";
 import CurrencySwitcherCard from "./components/CurrencySwitcherCard";
 import { FETCH_CATEGORIES } from "./graphql/queries";
 import { graphql } from "@apollo/react-hoc";
 import { Query } from "@apollo/react-components";
+import { ProductDescriptionPage } from "./pages/ProductDescriptionPage";
 
+const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);
 interface States {
   openModal: boolean;
   showCurrencySwitcherCard: boolean;
+  clothes: Product[];
+  techs: Product[];
 }
-const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);
 interface Props {}
 class App extends Component<Props, States> {
   state: Readonly<States> = {
     openModal: false,
     showCurrencySwitcherCard: false,
+    clothes: [],
+    techs: [],
   };
+
+  async initCategoryPage() {
+    const products = await segragateProductsToCategories(
+      (this.props as any).data?.category?.products
+    );
+
+    console.log({ products });
+    this.setState({
+      clothes: products.clothes,
+      techs: products.tech,
+    });
+  }
+
+  componentDidMount() {
+    this.initCategoryPage();
+  }
 
   toggleCurrencySwitcherCardHandler = () => {
     this.setState((prevState) => {
@@ -49,7 +72,7 @@ class App extends Component<Props, States> {
   };
 
   render(): ReactNode {
-    console.log((this.props as any).data?.category?.products);
+    console.log((this.props as any).data);
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
@@ -75,15 +98,18 @@ class App extends Component<Props, States> {
               element={
                 <CategoryPage
                   categoryName="clothes"
-                  products={(this.props as any).data?.category?.products}
+                  products={this.state.clothes}
                 />
               }
             />
             <Route
               path="/tech"
-              element={<CategoryPage categoryName="Tech" />}
+              element={
+                <CategoryPage categoryName="Tech" products={this.state.techs} />
+              }
             />
-
+            <Route path="/:id" element={<ProductDescriptionPage />} />
+            <Route path="/tech/:id" element={<ProductDescriptionPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>

@@ -3,18 +3,21 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface CurrencyState {
   currency: string;
+  currencyIndex: number;
 }
 
 const initialState: CurrencyState = {
   currency: "$",
+  currencyIndex: 0,
 };
 
 export const currencySlice = createSlice({
   name: "currencySlice",
   initialState,
   reducers: {
-    changeCurrency: (state, action: PayloadAction<string>) => {
-      state.currency = action.payload;
+    changeCurrency: (state, action: PayloadAction<CurrencyState>) => {
+      state.currency = action.payload.currency;
+      state.currencyIndex = action.payload.currencyIndex;
     },
   },
 });

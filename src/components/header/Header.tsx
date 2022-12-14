@@ -9,6 +9,7 @@ import { theme } from "../../config/theme";
 import { Button } from "../commons/Button";
 import { DropUpIcon } from "../../assets/svgs/DropUpIcon";
 import type { RootState } from "../../store/store";
+import type { Product } from "../../config/types";
 import { connect } from "react-redux";
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
   onShowCurrencySwitcherCard: () => void;
   showCurrencySwitcherCard: boolean;
   currency?: string;
-  cartItems?: string[];
+  cartItems?: Product[];
 }
 
 class Header extends Component<Props> {
@@ -24,6 +25,15 @@ class Header extends Component<Props> {
     onCartIconClick: () => console.log("cart icon clicked"),
     onShowCurrencySwitcherCard: () => console.log("currency switcher card"),
     showCurrencySwitcherCard: false,
+  };
+
+  cartModalHandler = () => {
+    if (this.props.cartItems?.length === 0) {
+      alert("Please add item to cart");
+      return;
+    }
+
+    this.props.onCartIconClick();
   };
 
   render(): ReactNode {
@@ -48,29 +58,32 @@ class Header extends Component<Props> {
 
             <ShopIcon />
             <Container
-              maxWidth="65px"
-              gap="5px"
+              width="80px"
+              justifyContent="flex-end"
               alignItems="center"
               height="fit-content"
+              gap="10px"
             >
-              <Typography
-                fontSize={theme.fontSize.m}
-                fontWeight={theme.fontWeight.medium}
-                lineHeight="2px"
-              >
-                {this.props.currency}
-              </Typography>
-              <Button
-                width="22px"
-                height="22px"
-                onClick={this.props.onShowCurrencySwitcherCard}
-              >
-                {this.props.showCurrencySwitcherCard ? (
-                  <DropUpIcon />
-                ) : (
-                  <DropDownIcon />
-                )}
-              </Button>
+              <Container alignItems="center" width="auto" gap="10px">
+                <Typography
+                  fontSize={theme.fontSize.m}
+                  fontWeight={theme.fontWeight.medium}
+                  lineHeight="2px"
+                >
+                  {this.props.currency}
+                </Typography>
+                <Button
+                  width="10px"
+                  height="10px"
+                  onClick={this.props.onShowCurrencySwitcherCard}
+                >
+                  {this.props.showCurrencySwitcherCard ? (
+                    <DropUpIcon />
+                  ) : (
+                    <DropDownIcon />
+                  )}
+                </Button>
+              </Container>
               {/* the container below displays the qty of products */}
               {this.props.cartItems?.length === 0 ? null : (
                 <Container
@@ -93,7 +106,11 @@ class Header extends Component<Props> {
                   </Typography>
                 </Container>
               )}
-              <Button onClick={this.props.onCartIconClick} marginLeft="10px">
+              <Button
+                onClick={this.cartModalHandler}
+                marginLeft="0px"
+                width="auto"
+              >
                 <CartIcon />
               </Button>
             </Container>

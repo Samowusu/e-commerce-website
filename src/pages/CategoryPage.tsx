@@ -23,20 +23,9 @@ export class CategoryPage extends Component<CategoryProps> {
             {this.props.categoryName}
           </Typography>
           <Container flexWrap="wrap" gap="30px" marginTop="50px">
-            {this.props.products?.map(
-              ({ id, name, prices, gallery, inStock, category }) => (
-                <ProductCard
-                  key={id}
-                  id={id}
-                  productName={name}
-                  currencySymbol={prices[0].currency.symbol}
-                  productPrice={prices[0].amount}
-                  image={gallery[0]}
-                  inStock={inStock}
-                  category={category}
-                />
-              )
-            )}
+            {this.props.products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
             {/* <ProductCard />
             <ProductCard />
             <ProductCard />

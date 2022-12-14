@@ -7,7 +7,7 @@ import { Glossary } from "./screens/playground/Glossary";
 import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
 import { CategoryPage } from "./pages/CategoryPage";
-import { CartPage } from "./pages/CartPage";
+import CartPage from "./pages/CartPage";
 import { Container } from "./components/commons/Container";
 import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
@@ -23,42 +23,36 @@ const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);
 interface States {
   openModal: boolean;
   showCurrencySwitcherCard: boolean;
-  clothes: Product[];
-  techs: Product[];
-  products: Product[];
 }
 interface Props {}
 class App extends Component<Props, States> {
   state: Readonly<States> = {
     openModal: false,
     showCurrencySwitcherCard: false,
-    clothes: [],
-    techs: [],
-    products: [],
   };
 
-  componentDidMount() {
-    this.setState({
-      products: (this.props as any).data?.category?.products,
-    });
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     products: (this.props as any).data?.category?.products,
+  //   });
+  // }
 
-  componentDidUpdate(prevProps: any) {
-    if (
-      prevProps.data.category.products.length !==
-      (this.props as any).data?.category?.products.length
-    ) {
-      this.setState({ products: (this.props as any).data?.category?.products });
+  // componentDidUpdate(prevProps: any) {
+  //   if (
+  //     prevProps.data.category.products.length !==
+  //     (this.props as any).data?.category?.products.length
+  //   ) {
+  //     this.setState({ products: (this.props as any).data?.category?.products });
 
-      const formatProducts = segragateProductsToCategories(
-        (this.props as any).data?.category?.products
-      );
-      this.setState({
-        clothes: formatProducts.clothes,
-        techs: formatProducts.tech,
-      });
-    }
-  }
+  //     const formatProducts = segragateProductsToCategories(
+  //       (this.props as any).data?.category?.products
+  //     );
+  //     this.setState({
+  //       clothes: formatProducts.clothes,
+  //       techs: formatProducts.tech,
+  //     });
+  //   }
+  // }
 
   // async initCategoryPage() {
   //   const products = await segragateProductsToCategories(
@@ -104,7 +98,20 @@ class App extends Component<Props, States> {
   };
 
   render(): ReactNode {
-    console.log((this.props as any).data?.category?.products);
+    const data = (this.props as any).data;
+
+    if (data.loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (data.error) {
+      return <div>Error</div>;
+    }
+
+    const segregatedProducts = segragateProductsToCategories(
+      data.category?.products
+    );
+    console.log("clothes", data.category?.products);
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
@@ -130,14 +137,17 @@ class App extends Component<Props, States> {
               element={
                 <CategoryPage
                   categoryName="clothes"
-                  products={this.state.clothes}
+                  products={segregatedProducts.clothes}
                 />
               }
             />
             <Route
               path="/tech"
               element={
-                <CategoryPage categoryName="Tech" products={this.state.techs} />
+                <CategoryPage
+                  categoryName="Tech"
+                  products={segregatedProducts.tech}
+                />
               }
             />
             <Route path="/:id" element={<ProductDescriptionPage />} />

@@ -33,9 +33,7 @@ export class Rectangle extends Component<Props> {
       >
         <Typography
           textTransform="uppercase"
-          fontSize={
-            this.props.max ? `${theme.fontSize.vs}` : `${theme.fontSize.s}`
-          }
+          fontSize={this.props.max ? `${theme.fontSize.s}` : "12px"}
           color={this.props.color}
         >
           {this.props.text}

@@ -40,6 +40,38 @@ export const DUMMY_PRODUCTS: Product[] = [
   },
 ];
 
+export const CURRENCIES = [
+  {
+    currency: {
+      symbol: "$",
+      label: "USD",
+    },
+  },
+  {
+    currency: {
+      symbol: "£",
+      label: "GBP",
+    },
+  },
+  {
+    currency: {
+      symbol: "A$",
+      label: "AUD",
+    },
+  },
+  {
+    currency: {
+      symbol: "¥",
+      label: "JPY",
+    },
+  },
+  {
+    currency: {
+      symbol: "₽",
+      label: "RUB",
+    },
+  },
+];
 //Utility Fns
 
 export const segragateProductsToCategories = (productsArray: Product[]) => {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { CartIcon } from "../../assets/svgs/CartIcon";
 import { ShopIcon } from "../../assets/svgs/ShopIcon";
 import { CartItemCard } from "../../components/cart/CartItemCard";
-import { CartOverlay } from "../../components/cart/CartOverlay";
+import CartOverlay from "../../components/cart/CartOverlay";
 import { Button } from "../../components/commons/Button";
 import { Container } from "../../components/commons/Container";
 import { Typography } from "../../components/commons/Typography";
@@ -23,7 +23,7 @@ export class Glossary extends Component {
         <ShopIcon />
         <CartIcon />
         <Header />
-        <ProductCard productName="lacoste" />
+        <ProductCard />
         <CartOverlay />
         <CartItemCard />
       </>

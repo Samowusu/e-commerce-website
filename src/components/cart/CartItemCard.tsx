@@ -14,23 +14,30 @@ import { GreyColorSquare } from "../../assets/svgs/GreyColorSquare";
 import { BlackColorSquare } from "../../assets/svgs/BlackColorSquare";
 import { GreenColorSquare } from "../../assets/svgs/GreenColorSquare";
 import { Rectangle } from "../commons/Rectangle";
+import type { AttributeSet } from "../../config/types";
+import { AttributeDisplay } from "./AttributeDisplay";
 
 interface Props {
   cartPage?: boolean;
-  colors?: string[];
-  sizes?: string[];
+  brandName?: string;
+  productName?: string;
+  productPrice?: number;
+  currencySymbol?: string;
+  attributes?: AttributeSet[];
+  image?: string;
 }
 export class CartItemCard extends Component<Props> {
   static defaultProps: Props = {
+    brandName: "apollo",
+    productPrice: 50.0,
+    currencySymbol: "$",
     cartPage: false,
-    colors: DUMMY_COLORS,
-    sizes: DUMMY_SIZES,
   };
 
   render() {
     return (
-      <Container justifyContent="space-between">
-        <Container maxWidth="150px">
+      <Container border borderColor="black">
+        <Container border width="60%">
           <Container flexDirection="column" gap="10px">
             <Typography
               fontWeight={
@@ -44,7 +51,7 @@ export class CartItemCard extends Component<Props> {
                   : `${theme.fontSize.s}`
               }
             >
-              Apollo
+              {this.props.brandName}
             </Typography>
             <Typography
               fontWeight={
@@ -58,7 +65,7 @@ export class CartItemCard extends Component<Props> {
                   : `${theme.fontSize.s}`
               }
             >
-              Running shorts
+              {this.props.productName}
             </Typography>
             <Typography
               fontWeight={
@@ -72,9 +79,19 @@ export class CartItemCard extends Component<Props> {
                   : `${theme.fontSize.s}`
               }
             >
-              $50.00
+              {this.props.currencySymbol}
+              {this.props.productPrice}
             </Typography>
-            <Typography>Size:</Typography>
+            {this.props.attributes?.map((attribute) => (
+              <AttributeDisplay
+                key={attribute.id}
+                title={attribute.name}
+                type={attribute.type}
+                items={attribute.items}
+                cartPage={this.props.cartPage}
+              />
+            ))}
+            {/* <Typography>Size:</Typography>
             <Container gap="8px">
               {this.props.sizes?.map((size, index) => (
                 <Rectangle
@@ -85,16 +102,16 @@ export class CartItemCard extends Component<Props> {
                   max={this.props.cartPage ? true : false}
                 />
               ))}
-            </Container>
-            <Typography>Color:</Typography>
+            </Container> */}
+            {/* <Typography>Color:</Typography>
             <Container gap="8px">
               {this.props.colors?.map((color, index) => (
                 <Rectangle key={index} border={false} background={color} />
               ))}
-            </Container>
+            </Container> */}
           </Container>
         </Container>
-        <Container gap="5px" maxWidth="150px">
+        <Container gap="5px" width="40%" border>
           <Container
             flexDirection="column"
             justifyContent="space-between"
@@ -105,9 +122,9 @@ export class CartItemCard extends Component<Props> {
             <Typography>1</Typography>
             <MinusIcon />
           </Container>
-          <Container>
-            <Container width="100px">
-              <img src={shirt} alt="product" />
+          <Container width="80%">
+            <Container>
+              <img src={this.props.image} alt="product" />
             </Container>
           </Container>
         </Container>

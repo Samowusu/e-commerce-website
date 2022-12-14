@@ -36,6 +36,13 @@ const CustomButton = styled.button<StyleProps>`
   margin-right: ${({ marginRight }) => marginRight ?? ""};
   margin-left: ${({ marginLeft }) => marginLeft ?? ""};
 
+  position: ${({ position }) => position ?? ""};
+  top: ${({ top }) => top ?? ""};
+  bottom: ${({ bottom }) => bottom ?? ""};
+  right: ${({ right }) => right ?? ""};
+  left: ${({ left }) => left ?? ""};
+  z-index: ${({ zIndex }) => zIndex ?? ""};
+
   cursor: pointer;
 `;
 
@@ -63,6 +70,12 @@ interface Props {
   borderColor?: string;
   onClick?: () => void;
   border?: boolean;
+  position?: string;
+  top?: string;
+  bottom?: string;
+  right?: string;
+  left?: string;
+  zIndex?: string;
 }
 
 export class Button extends Component<Props> {
@@ -91,6 +104,12 @@ export class Button extends Component<Props> {
         border={this.props.border}
         onClick={this.props.onClick}
         height={this.props.height}
+        position={this.props.position}
+        top={this.props.top}
+        bottom={this.props.bottom}
+        right={this.props.right}
+        left={this.props.left}
+        zIndex={this.props.zIndex}
       >
         {this.props.children}
       </CustomButton>

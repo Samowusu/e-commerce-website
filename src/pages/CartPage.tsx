@@ -4,8 +4,15 @@ import { Button } from "../components/commons/Button";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
 import { theme } from "../config/theme";
+import type { RootState } from "../store/store";
+import type { Product } from "../config/types";
+import { connect } from "react-redux";
 
-export class CartPage extends Component {
+interface Props {
+  cartProducts: Product[];
+}
+
+class CartPage extends Component<Props> {
   render() {
     return (
       <Container justifyContent="center">
@@ -25,12 +32,25 @@ export class CartPage extends Component {
             borderLeft="none"
             borderRight="none"
           >
-            <Container borderBottom borderColor={theme.colors.ash} pV="20px">
-              <CartItemCard cartPage />
-            </Container>
-            <Container borderBottom borderColor={theme.colors.ash} pV="20px">
-              <CartItemCard cartPage />
-            </Container>
+            {this.props.cartProducts.map((product) => (
+              <Container
+                borderBottom
+                borderColor={theme.colors.ash}
+                pV="20px"
+                key={product.id}
+                height="350px"
+              >
+                <CartItemCard
+                  brandName={product.brand}
+                  attributes={product.attributes}
+                  productName={product.name}
+                  productPrice={product.prices[0].amount}
+                  cartPage={true}
+                  currencySymbol={product.prices[0].currency.symbol}
+                  image={product.gallery[0]}
+                />
+              </Container>
+            ))}
           </Container>
           <Container flexDirection="column" gap="10px" marginTop="30px">
             <Container gap="10px">
@@ -80,3 +100,11 @@ export class CartPage extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    cartProducts: state.cartSlice.items,
+  };
+};
+
+export default connect(mapStateToProps)(CartPage);

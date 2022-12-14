@@ -6,6 +6,16 @@ export const FETCH_CATEGORIES = gql`
       products {
         id
         name
+        brand
+        attributes {
+          id
+          name
+          type
+          items {
+            id
+            value
+          }
+        }
         inStock
         category
         gallery

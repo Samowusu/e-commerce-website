@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 import { headerHeight } from "../config/constants";
+import { CURRENCIES } from "../config/utils";
 import { theme } from "../config/theme";
 import type { RootState, AppDispatch } from "../store/store";
-import { changeCurrency } from "../store/currencySlice";
+import { changeCurrency, CurrencyState } from "../store/currencySlice";
 import { connect } from "react-redux";
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
   onShowCurrencySwitcherCard: () => void;
 }
 class CurrencySwitcherCard extends Component<Props> {
-  selectCurrencyHandler = (currency: string) => {
+  selectCurrencyHandler = (currency: CurrencyState) => {
     this.props.dispatch(changeCurrency(currency));
     this.props.onShowCurrencySwitcherCard();
   };
@@ -30,17 +31,27 @@ class CurrencySwitcherCard extends Component<Props> {
         pV="10px"
         boxShadow
       >
-        <Container
-          gap="10px"
-          pV="8px"
-          paddingLeft="10px"
-          hover
-          onClick={() => this.selectCurrencyHandler("$")}
-        >
-          <Typography>$</Typography>
-          <Typography>USD</Typography>
-        </Container>
-        <Container
+        {CURRENCIES.map((price, index) => (
+          <Container
+            key={index}
+            gap="10px"
+            pV="8px"
+            pH="15px"
+            justifyContent="space-between"
+            hover
+            onClick={() =>
+              this.selectCurrencyHandler({
+                currency: price.currency.symbol,
+                currencyIndex: index,
+              })
+            }
+          >
+            <Typography>{price.currency.symbol}</Typography>
+            <Typography>{price.currency.label}</Typography>
+          </Container>
+        ))}
+
+        {/* <Container
           gap="10px"
           pV="8px"
           paddingLeft="10px"
@@ -59,7 +70,7 @@ class CurrencySwitcherCard extends Component<Props> {
         >
           <Typography>¥</Typography>
           <Typography>JPY</Typography>
-        </Container>
+        </Container> */}
       </Container>
     );
   }

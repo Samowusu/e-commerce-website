@@ -5,24 +5,40 @@ import { Typography } from "../commons/Typography";
 import { theme } from "../../config/theme";
 import { CartItemCard } from "./CartItemCard";
 import { Button } from "../commons/Button";
+import type { RootState } from "../../store/store";
+import type { Product } from "../../config/types";
+import { connect } from "react-redux";
+import { initialProduct } from "../../store/cartSlice";
 
 interface Props {
+  cartProducts: Product[];
   onCheckout?: () => void;
   onCloseModal?: () => void;
+  totalPrice: number;
+  currencyIndex: number;
+  currency: string;
 }
-export class CartOverlay extends Component<Props> {
+class CartOverlay extends Component<Props> {
   static defaultProps: Props = {
     onCheckout: () => console.log("checkout"),
     onCloseModal: () => console.log("cart Modal is closed"),
+    cartProducts: [initialProduct],
+    totalPrice: 0,
+    currencyIndex: 0,
+    currency: "$",
   };
 
   render() {
+    const bagDescription =
+      this.props.cartProducts.length === 1 ? "item" : "items";
     return (
-      <Container padding="20px" maxWidth="320px" border>
+      <Container padding="10px" maxWidth="350px" border>
         <Container width="100%" flexDirection="column">
           <Container gap="5px" marginBottom="25px">
             <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
-            <Typography>3 items</Typography>
+            <Typography>
+              {this.props.cartProducts.length} {bagDescription}
+            </Typography>
           </Container>
           <Container
             flexDirection="column"
@@ -31,12 +47,27 @@ export class CartOverlay extends Component<Props> {
             maxHeight="350px"
             overflow="auto"
           >
-            <CartItemCard />
-            <CartItemCard />
+            {this.props.cartProducts.map((product) => (
+              <CartItemCard
+                key={product.id}
+                brandName={product.brand}
+                attributes={product.attributes}
+                productName={product.name}
+                productPrice={product.prices[this.props.currencyIndex].amount}
+                cartPage={false}
+                currencySymbol={
+                  product.prices[this.props.currencyIndex].currency.symbol
+                }
+                image={product.gallery[0]}
+              />
+            ))}
           </Container>
           <Container justifyContent="space-between">
             <Typography fontWeight={theme.fontWeight.medium}>Total</Typography>
-            <Typography fontWeight={theme.fontWeight.bold}>$200</Typography>
+            <Typography fontWeight={theme.fontWeight.bold}>
+              {this.props.currency}
+              {this.props.totalPrice}
+            </Typography>
           </Container>
           <Container marginTop="40px" justifyContent="space-between">
             <Button
@@ -78,3 +109,14 @@ export class CartOverlay extends Component<Props> {
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    cartProducts: state.cartSlice.items,
+    totalPrice: state.cartSlice.totalPrice,
+    currencyIndex: state.currencySlice.currencyIndex,
+    currency: state.currencySlice.currency,
+  };
+};
+
+export default connect(mapStateToProps)(CartOverlay);

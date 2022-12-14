@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { theme } from "../../config/theme";
 import { Container } from "../commons/Container";
 import Modal from "react-modal";
-import { CartOverlay } from "./CartOverlay";
+import CartOverlay from "./CartOverlay";
 import { headerHeight } from "../../config/constants";
 
 const customStyles = {

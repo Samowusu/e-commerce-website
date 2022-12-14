@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Product } from "../config/types";
 
@@ -65,10 +65,8 @@ export const cartSlice = createSlice({
       }
     },
 
-    computeTotalPrice: (state, action: PayloadAction<number>) => {
-      // state.totalPrice = state.items.reduce((current, next) =>
-      //  current.prices[action.payload].amount + next.prices[action.payload].amount
-      // )
+    computeTotalPrice: (state) => {
+      state.items.forEach((item) => console.log("price", current(item)));
     },
   },
 });

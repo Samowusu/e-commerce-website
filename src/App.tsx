@@ -98,6 +98,7 @@ class App extends Component<Props, States> {
   };
 
   render(): ReactNode {
+    // return <Glossary />;
     const data = (this.props as any).data;
 
     if (data.loading) {

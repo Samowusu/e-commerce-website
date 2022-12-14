@@ -58,7 +58,7 @@ class CartOverlay extends Component<Props> {
                 currencySymbol={
                   product.prices[this.props.currencyIndex].currency.symbol
                 }
-                image={product.gallery[0]}
+                images={product.gallery}
               />
             ))}
           </Container>
@@ -69,15 +69,20 @@ class CartOverlay extends Component<Props> {
               {this.props.totalPrice}
             </Typography>
           </Container>
-          <Container marginTop="40px" justifyContent="space-between">
-            <Button
-              width="48%"
-              pV="15px"
-              borderColor={theme.colors.primaryText}
-              border
-              onClick={this.props.onCloseModal}
+          <Container marginTop="40px" justifyContent="space-between" border>
+            <Link
+              to={"/cart"}
+              style={{
+                width: "48%",
+                height: "auto",
+              }}
             >
-              <Link to={"/cart"}>
+              <Button
+                pV="15px"
+                borderColor={theme.colors.primaryText}
+                border
+                onClick={this.props.onCloseModal}
+              >
                 <Typography
                   textTransform="uppercase"
                   fontSize={theme.fontSize.vs}
@@ -85,8 +90,8 @@ class CartOverlay extends Component<Props> {
                 >
                   View Bag
                 </Typography>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <Button
               width="48%"
               pV="15px"

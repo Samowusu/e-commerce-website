@@ -41,6 +41,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
 
   handleAddToCart = (product: AddToCartPayload) => {
     this.props.dispatch && this.props?.dispatch(addToCart(product));
+    this.props.dispatch && this.props?.dispatch(computeTotalPrice());
   };
 
   handleMouseEnter = () => {
@@ -154,7 +155,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             zIndex="200"
             position="absolute"
             bottom="25%"
-            right="15px"
+            right="20px"
             onClick={() => {
               this.handleAddToCart({
                 product: this.props.product,

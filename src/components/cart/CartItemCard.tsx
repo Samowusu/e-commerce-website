@@ -16,6 +16,7 @@ import { GreenColorSquare } from "../../assets/svgs/GreenColorSquare";
 import { Rectangle } from "../commons/Rectangle";
 import type { AttributeSet } from "../../config/types";
 import { AttributeDisplay } from "./AttributeDisplay";
+import { CartItemCarousel } from "./CartItemCarousel";
 
 interface Props {
   cartPage?: boolean;
@@ -24,7 +25,7 @@ interface Props {
   productPrice?: number;
   currencySymbol?: string;
   attributes?: AttributeSet[];
-  image?: string;
+  images: string[];
 }
 export class CartItemCard extends Component<Props> {
   static defaultProps: Props = {
@@ -32,6 +33,7 @@ export class CartItemCard extends Component<Props> {
     productPrice: 50.0,
     currencySymbol: "$",
     cartPage: false,
+    images: [`${shirt}`],
   };
 
   render() {
@@ -123,9 +125,13 @@ export class CartItemCard extends Component<Props> {
             <MinusIcon />
           </Container>
           <Container width="80%">
-            <Container>
-              <img src={this.props.image} alt="product" />
-            </Container>
+            {this.props.cartPage ? (
+              <CartItemCarousel images={this.props.images} />
+            ) : (
+              <Container>
+                <img src={this.props.images[0]} alt="product" />
+              </Container>
+            )}
           </Container>
         </Container>
       </Container>

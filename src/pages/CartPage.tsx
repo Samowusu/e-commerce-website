@@ -47,7 +47,7 @@ class CartPage extends Component<Props> {
                   productPrice={product.prices[0].amount}
                   cartPage={true}
                   currencySymbol={product.prices[0].currency.symbol}
-                  image={product.gallery[0]}
+                  images={product.gallery}
                 />
               </Container>
             ))}

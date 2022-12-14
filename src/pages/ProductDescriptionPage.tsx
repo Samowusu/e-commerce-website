@@ -7,6 +7,8 @@ import { DUMMY_COLORS, DUMMY_SIZES } from "../config/utils";
 import { Rectangle } from "../components/commons/Rectangle";
 import { Button } from "../components/commons/Button";
 
+// type Pageprops = RouteComponentProps<TypeProps>;
+// class Page02 extends React.Component<Page02Props, TypeState> {
 interface Props {
   brandName?: string;
   productName?: string;
@@ -27,6 +29,8 @@ export class ProductDescriptionPage extends Component<Props> {
   };
 
   render() {
+    // const { state } = this.props.location
+
     return (
       <Container justifyContent="center" paddingTop="50px">
         <Container width="90%">

@@ -13,9 +13,11 @@ import ProductCard from "../components/ProductCard";
 import { DUMMY_SIZES, DUMMY_COLORS } from "../config/utils";
 import { ProductDescriptionPage } from "../pages/ProductDescriptionPage";
 import { CartModal } from "../components/cart/CartModal";
+import { CartItemCarousel } from "../components/cart/CartItemCarousel";
 
 export class Playground extends Component {
   render() {
+    return <CartItemCarousel />;
     return (
       <Container flexDirection="column">
         <Header />

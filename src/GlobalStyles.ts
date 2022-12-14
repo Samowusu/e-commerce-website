@@ -43,4 +43,19 @@ img {
   height: 100%;
   width: 100%
 }
+.carousel  {
+  height: 100%
+}
+
+.carousel .control-arrow .control-next{
+    top: 0;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    margin-top: 0;
+    padding: 5px;
+    background: black;
+    display: flex;
+    align-items: flex-end;
+}
 `;

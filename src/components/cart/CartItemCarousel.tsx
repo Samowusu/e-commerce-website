@@ -62,8 +62,12 @@ export class CartItemCarousel extends Component<Props> {
           infiniteLoop
         >
           {this.props.images.map((image, index) => (
-            <Container key={index}>
-              <img src={image} />
+            <Container key={index} height="100%">
+              <img
+                src={image}
+                alt="the product"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
             </Container>
           ))}
         </Carousel>

@@ -39,84 +39,82 @@ class Header extends Component<Props> {
   render(): ReactNode {
     console.log(this.props.cartItems);
     return (
-      <>
+      <Container
+        justifyContent="center"
+        position="fixed"
+        zIndex="100"
+        top="0"
+        bg={theme.colors.primaryBackground}
+      >
         <Container
-          justifyContent="center"
-          position="fixed"
-          zIndex="100"
-          top="0"
-          bg={theme.colors.primaryBackground}
+          justifyContent="space-between"
+          width="90%"
+          paddingRight="60px"
+          paddingTop="24px"
+          position="relative"
         >
-          <Container
-            justifyContent="space-between"
-            width="90%"
-            paddingRight="60px"
-            paddingTop="24px"
-            position="relative"
-          >
-            <NavBar />
+          <NavBar />
 
-            <ShopIcon />
-            <Container
-              width="80px"
-              justifyContent="flex-end"
-              alignItems="center"
-              height="fit-content"
-              gap="10px"
-            >
-              <Container alignItems="center" width="auto" gap="10px">
-                <Typography
-                  fontSize={theme.fontSize.m}
-                  fontWeight={theme.fontWeight.medium}
-                  lineHeight="2px"
-                >
-                  {this.props.currency}
-                </Typography>
-                <Button
-                  width="10px"
-                  height="10px"
-                  onClick={this.props.onShowCurrencySwitcherCard}
-                >
-                  {this.props.showCurrencySwitcherCard ? (
-                    <DropUpIcon />
-                  ) : (
-                    <DropDownIcon />
-                  )}
-                </Button>
-              </Container>
-              {/* the container below displays the qty of products */}
-              {this.props.cartItems?.length === 0 ? null : (
-                <Container
-                  width="20px"
-                  height="20px"
-                  justifyContent="center"
-                  alignItems="center"
-                  borderRadius="50%"
-                  bg={theme.colors.black}
-                  position="absolute"
-                  right="50px"
-                  top="15px"
-                >
-                  <Typography
-                    fontSize={theme.fontSize.vs}
-                    fontWeight={theme.fontWeight.bold}
-                    color={theme.colors.primaryBackground}
-                  >
-                    {this.props.cartItems?.length}
-                  </Typography>
-                </Container>
-              )}
-              <Button
-                onClick={this.cartModalHandler}
-                marginLeft="0px"
-                width="auto"
+          <ShopIcon />
+          <Container
+            width="80px"
+            justifyContent="flex-end"
+            alignItems="center"
+            height="fit-content"
+            gap="10px"
+          >
+            <Container alignItems="center" width="auto" gap="10px">
+              <Typography
+                fontSize={theme.fontSize.m}
+                fontWeight={theme.fontWeight.medium}
+                lineHeight="2px"
               >
-                <CartIcon />
+                {this.props.currency}
+              </Typography>
+              <Button
+                width="10px"
+                height="10px"
+                onClick={this.props.onShowCurrencySwitcherCard}
+              >
+                {this.props.showCurrencySwitcherCard ? (
+                  <DropUpIcon />
+                ) : (
+                  <DropDownIcon />
+                )}
               </Button>
             </Container>
+            {/* the container below displays the qty of products */}
+            {this.props.cartItems?.length === 0 ? null : (
+              <Container
+                width="20px"
+                height="20px"
+                justifyContent="center"
+                alignItems="center"
+                borderRadius="50%"
+                bg={theme.colors.black}
+                position="absolute"
+                right="50px"
+                top="15px"
+              >
+                <Typography
+                  fontSize={theme.fontSize.vs}
+                  fontWeight={theme.fontWeight.bold}
+                  color={theme.colors.primaryBackground}
+                >
+                  {this.props.cartItems?.length}
+                </Typography>
+              </Container>
+            )}
+            <Button
+              onClick={this.cartModalHandler}
+              marginLeft="0px"
+              width="auto"
+            >
+              <CartIcon />
+            </Button>
           </Container>
         </Container>
-      </>
+      </Container>
     );
   }
 }

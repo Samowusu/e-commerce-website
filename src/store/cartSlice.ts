@@ -65,8 +65,18 @@ export const cartSlice = createSlice({
       }
     },
 
-    computeTotalPrice: (state) => {
-      state.items.forEach((item) => console.log("price", current(item)));
+    computeTotalPrice: (state, action: PayloadAction<number>) => {
+      let prices: number[] = [];
+      state.items.forEach((item) =>
+        prices.push(item.prices[action.payload].amount)
+      );
+
+      state.totalPrice = Number(
+        prices.reduce((accumulator, price) => accumulator + price, 0).toFixed(2)
+      );
+      // state.totalPrice = state.items.reduce((accumulator,currentPrice) =>
+      // accumulator + (currentPrice.prices[0].amount as number)
+      // )
     },
   },
 });

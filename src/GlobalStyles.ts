@@ -46,6 +46,12 @@ img {
 .carousel  {
   height: 100%
 }
+.carousel .slider-wrapper, .carousel .slider {
+  width:100%;
+  height:100%
+}
+
+
 
 .carousel .control-arrow .control-next{
     top: 0;

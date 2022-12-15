@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 
 interface Props {
   cartProducts: Product[];
+  totalPrice: number;
+  currency: string;
 }
 
 class CartPage extends Component<Props> {
@@ -59,7 +61,8 @@ class CartPage extends Component<Props> {
                 fontSize={theme.fontSize.l}
                 fontWeight={theme.fontWeight.bold}
               >
-                $32
+                {this.props.currency}
+                {(this.props.totalPrice * 0.21).toFixed(2)}
               </Typography>
             </Container>
             <Container gap="10px">
@@ -82,7 +85,8 @@ class CartPage extends Component<Props> {
                 fontSize={theme.fontSize.l}
                 fontWeight={theme.fontWeight.bold}
               >
-                $200
+                {this.props.currency}
+                {this.props.totalPrice}
               </Typography>
             </Container>
             <Button bg={theme.colors.secondaryText} pV="10px">
@@ -104,6 +108,8 @@ class CartPage extends Component<Props> {
 const mapStateToProps = (state: RootState) => {
   return {
     cartProducts: state.cartSlice.items,
+    totalPrice: state.cartSlice.totalPrice,
+    currency: state.currencySlice.currency,
   };
 };
 

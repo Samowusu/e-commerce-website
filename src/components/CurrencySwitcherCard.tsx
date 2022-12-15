@@ -6,6 +6,7 @@ import { CURRENCIES } from "../config/utils";
 import { theme } from "../config/theme";
 import type { RootState, AppDispatch } from "../store/store";
 import { changeCurrency, CurrencyState } from "../store/currencySlice";
+import { computeTotalPrice } from "../store/cartSlice";
 import { connect } from "react-redux";
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
 class CurrencySwitcherCard extends Component<Props> {
   selectCurrencyHandler = (currency: CurrencyState) => {
     this.props.dispatch(changeCurrency(currency));
+    this.props.dispatch(computeTotalPrice(currency.currencyIndex));
     this.props.onShowCurrencySwitcherCard();
   };
 
@@ -23,7 +25,7 @@ class CurrencySwitcherCard extends Component<Props> {
       <Container
         flexDirection="column"
         maxWidth="100px"
-        position="absolute"
+        position="fixed"
         zIndex="200"
         top={"50px"}
         right="8%"

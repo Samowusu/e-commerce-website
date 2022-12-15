@@ -31,52 +31,6 @@ class App extends Component<Props, States> {
     showCurrencySwitcherCard: false,
   };
 
-  // componentDidMount() {
-  //   this.setState({
-  //     products: (this.props as any).data?.category?.products,
-  //   });
-  // }
-
-  // componentDidUpdate(prevProps: any) {
-  //   if (
-  //     prevProps.data.category.products.length !==
-  //     (this.props as any).data?.category?.products.length
-  //   ) {
-  //     this.setState({ products: (this.props as any).data?.category?.products });
-
-  //     const formatProducts = segragateProductsToCategories(
-  //       (this.props as any).data?.category?.products
-  //     );
-  //     this.setState({
-  //       clothes: formatProducts.clothes,
-  //       techs: formatProducts.tech,
-  //     });
-  //   }
-  // }
-
-  // async initCategoryPage() {
-  //   const products = await segragateProductsToCategories(
-  //     (this.props as any).data?.category?.products
-  //   );
-
-  //   console.log({ products });
-  //   this.setState({
-  //     clothes: products.clothes,
-  //     techs: products.tech,
-  //   });
-  // }
-
-  // componentDidMount() {
-  //   this.initCategoryPage();
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   if( (this.props as any).data?.category?.products !== prevProps.data.category.products) {
-  //     this.fetchData(this.props.userID);
-  //   }
-  // }
-
   toggleCurrencySwitcherCardHandler = () => {
     this.setState((prevState) => {
       return {

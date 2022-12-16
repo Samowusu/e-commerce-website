@@ -8,6 +8,7 @@ export type Product = {
   attributes: [AttributeSet];
   prices: [Price];
   brand: string;
+  quantity: number;
 };
 
 export type AttributeSet = {

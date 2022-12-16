@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "../commons/Container";
 import { Typography } from "../commons/Typography";
 import { theme } from "../../config/theme";
-import { CartItemCard } from "./CartItemCard";
+import CartItemCard from "./CartItemCard";
 import { Button } from "../commons/Button";
 import type { RootState } from "../../store/store";
 import type { Product } from "../../config/types";
@@ -50,6 +50,7 @@ class CartOverlay extends Component<Props> {
             {this.props.cartProducts.map((product) => (
               <CartItemCard
                 key={product.id}
+                id={product.id}
                 brandName={product.brand}
                 attributes={product.attributes}
                 productName={product.name}
@@ -59,6 +60,7 @@ class CartOverlay extends Component<Props> {
                   product.prices[this.props.currencyIndex].currency.symbol
                 }
                 images={product.gallery}
+                quantity={product.quantity}
               />
             ))}
           </Container>

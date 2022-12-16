@@ -17,23 +17,56 @@ import { Rectangle } from "../commons/Rectangle";
 import type { AttributeSet } from "../../config/types";
 import { AttributeDisplay } from "./AttributeDisplay";
 import { CartItemCarousel } from "./CartItemCarousel";
+import type { RootState, AppDispatch } from "../../store/store";
+import {
+  increaseQuantity,
+  computeTotalPrice,
+  decreaseQuantity,
+  removeItem,
+} from "../../store/cartSlice";
+
+import { connect } from "react-redux";
+import { Button } from "../commons/Button";
 
 interface Props {
+  dispatch?: AppDispatch;
   cartPage?: boolean;
   brandName?: string;
   productName?: string;
   productPrice?: number;
   currencySymbol?: string;
+  quantity: number;
+  id: string;
+  currencyIndex: number;
   attributes?: AttributeSet[];
   images: string[];
 }
-export class CartItemCard extends Component<Props> {
+class CartItemCard extends Component<Props> {
   static defaultProps: Props = {
+    id: "product-id",
+    quantity: 1,
     brandName: "apollo",
     productPrice: 50.0,
     currencySymbol: "$",
     cartPage: false,
     images: [`${shirt}`],
+    currencyIndex: 0,
+  };
+
+  handleIncreaseQuantity = (id: string) => {
+    this.props.dispatch && this.props?.dispatch(increaseQuantity(id));
+    this.props.dispatch &&
+      this.props?.dispatch(computeTotalPrice(this.props.currencyIndex));
+  };
+
+  handleDecreaseQuantity = (id: string) => {
+    this.props.dispatch && this.props?.dispatch(decreaseQuantity(id));
+    this.props.dispatch &&
+      this.props?.dispatch(computeTotalPrice(this.props.currencyIndex));
+    if (this.props.quantity === 1) {
+      console.log("removing from card");
+      this.props.dispatch && this.props?.dispatch(removeItem(id));
+    }
   };
 
   render() {
@@ -120,9 +153,13 @@ export class CartItemCard extends Component<Props> {
             alignItems="center"
             width="20%"
           >
-            <PlusIcon />
-            <Typography>1</Typography>
-            <MinusIcon />
+            <Button onClick={() => this.handleIncreaseQuantity(this.props.id)}>
+              <PlusIcon />
+            </Button>
+            <Typography>{this.props.quantity}</Typography>
+            <Button onClick={() => this.handleDecreaseQuantity(this.props.id)}>
+              <MinusIcon />
+            </Button>
           </Container>
           <Container width="80%">
             {this.props.cartPage ? (
@@ -138,3 +175,10 @@ export class CartItemCard extends Component<Props> {
     );
   }
 }
+const mapStateToProps = (state: RootState) => {
+  return {
+    currencyIndex: state.currencySlice.currencyIndex,
+  };
+};
+
+export default connect(mapStateToProps)(CartItemCard);

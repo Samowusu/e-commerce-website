@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CartPage from "../pages/CartPage";
-import { CartItemCard } from "../components/cart/CartItemCard";
+import CartItemCard from "../components/cart/CartItemCard";
 import CartOverlay from "../components/cart/CartOverlay";
 import { Button } from "../components/commons/Button";
 import { Container } from "../components/commons/Container";

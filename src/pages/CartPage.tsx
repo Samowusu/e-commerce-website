@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CartItemCard } from "../components/cart/CartItemCard";
+import CartItemCard from "../components/cart/CartItemCard";
 import { Button } from "../components/commons/Button";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
@@ -12,6 +12,7 @@ interface Props {
   cartProducts: Product[];
   totalPrice: number;
   currency: string;
+  currencyIndex: number;
 }
 
 class CartPage extends Component<Props> {
@@ -46,10 +47,13 @@ class CartPage extends Component<Props> {
                   brandName={product.brand}
                   attributes={product.attributes}
                   productName={product.name}
-                  productPrice={product.prices[0].amount}
+                  productPrice={product.prices[this.props.currencyIndex].amount}
                   cartPage={true}
-                  currencySymbol={product.prices[0].currency.symbol}
+                  currencySymbol={
+                    product.prices[this.props.currencyIndex].currency.symbol
+                  }
                   images={product.gallery}
+                  quantity={product.quantity}
                 />
               </Container>
             ))}
@@ -110,6 +114,7 @@ const mapStateToProps = (state: RootState) => {
     cartProducts: state.cartSlice.items,
     totalPrice: state.cartSlice.totalPrice,
     currency: state.currencySlice.currency,
+    currencyIndex: state.currencySlice.currencyIndex,
   };
 };
 

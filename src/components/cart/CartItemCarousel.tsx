@@ -40,7 +40,7 @@ export class CartItemCarousel extends Component<Props> {
               position="absolute"
               bottom="0"
               right="10px"
-              zIndex="100"
+              zIndex="10"
             >
               <NextIcon />
             </Button>
@@ -54,7 +54,7 @@ export class CartItemCarousel extends Component<Props> {
               position="absolute"
               bottom="0"
               right="40px"
-              zIndex="100"
+              zIndex="10"
             >
               <PrevIcon />
             </Button>

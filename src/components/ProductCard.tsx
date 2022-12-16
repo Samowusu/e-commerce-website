@@ -159,8 +159,9 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             right="20px"
             onClick={() => {
               this.handleAddToCart({
-                product: this.props.product,
+                product: { ...this.props.product, quantity: 1 },
                 index: this.props.currencyIndex,
+                quantity: 1,
               });
             }}
           >

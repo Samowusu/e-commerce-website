@@ -7,6 +7,7 @@ export const DUMMY_COLORS: string[] = ["grey", "black", "green"];
 
 export const DUMMY_PRODUCTS: Product[] = [
   {
+    quantity: 1,
     id: "some-string",
     name: "apollo running shorts",
     inStock: true,

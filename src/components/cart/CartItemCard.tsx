@@ -71,8 +71,8 @@ class CartItemCard extends Component<Props> {
 
   render() {
     return (
-      <Container border borderColor="black">
-        <Container border width="60%">
+      <Container>
+        <Container width="60%">
           <Container flexDirection="column" gap="10px">
             <Typography
               fontWeight={
@@ -146,7 +146,7 @@ class CartItemCard extends Component<Props> {
             </Container> */}
           </Container>
         </Container>
-        <Container gap="5px" width="40%" border>
+        <Container gap="5px" width="40%">
           <Container
             flexDirection="column"
             justifyContent="space-between"
@@ -154,11 +154,17 @@ class CartItemCard extends Component<Props> {
             width="20%"
           >
             <Button onClick={() => this.handleIncreaseQuantity(this.props.id)}>
-              <PlusIcon />
+              <PlusIcon
+                width={this.props.cartPage ? "100%" : "24"}
+                heigth={this.props.cartPage ? "45" : "24"}
+              />
             </Button>
             <Typography>{this.props.quantity}</Typography>
             <Button onClick={() => this.handleDecreaseQuantity(this.props.id)}>
-              <MinusIcon />
+              <MinusIcon
+                width={this.props.cartPage ? "100%" : "24"}
+                heigth={this.props.cartPage ? "45" : "24"}
+              />
             </Button>
           </Container>
           <Container width="80%">

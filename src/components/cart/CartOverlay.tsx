@@ -32,7 +32,7 @@ class CartOverlay extends Component<Props> {
     const bagDescription =
       this.props.cartProducts.length === 1 ? "item" : "items";
     return (
-      <Container padding="10px" maxWidth="350px" border>
+      <Container padding="10px" maxWidth="350px">
         <Container width="100%" flexDirection="column">
           <Container gap="5px" marginBottom="25px">
             <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
@@ -71,7 +71,7 @@ class CartOverlay extends Component<Props> {
               {this.props.totalPrice}
             </Typography>
           </Container>
-          <Container marginTop="40px" justifyContent="space-between" border>
+          <Container marginTop="40px" justifyContent="space-between">
             <Link
               to={"/cart"}
               style={{

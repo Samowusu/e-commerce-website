@@ -15,16 +15,23 @@ import { connect } from "react-redux";
 interface Props {
   onCartIconClick: () => void;
   onShowCurrencySwitcherCard: () => void;
+  onCloseCurrencySwitcherCard: () => void;
   showCurrencySwitcherCard: boolean;
   currency?: string;
   cartItems?: Product[];
+  openModal: boolean;
+  onCloseCartModal: () => void;
 }
 
 class Header extends Component<Props> {
   static defaultProps: Props = {
     onCartIconClick: () => console.log("cart icon clicked"),
     onShowCurrencySwitcherCard: () => console.log("currency switcher card"),
+    onCloseCurrencySwitcherCard: () =>
+      console.log("currency switcher card closed"),
     showCurrencySwitcherCard: false,
+    openModal: false,
+    onCloseCartModal: () => console.log("cart modal closed"),
   };
 
   cartModalHandler = () => {
@@ -45,6 +52,15 @@ class Header extends Component<Props> {
         zIndex="100"
         top="0"
         bg={theme.colors.primaryBackground}
+        onClick={() => {
+          if (this.props.showCurrencySwitcherCard) {
+            this.props.onCloseCurrencySwitcherCard();
+          }
+
+          if (this.props.openModal) {
+            this.props.onCloseCartModal();
+          }
+        }}
       >
         <Container
           justifyContent="space-between"

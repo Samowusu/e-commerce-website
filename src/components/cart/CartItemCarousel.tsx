@@ -16,13 +16,7 @@ export class CartItemCarousel extends Component<Props> {
   };
   render() {
     return (
-      <Container
-        border
-        borderColor="blue"
-        height="100%"
-        width="350px"
-        position="relative"
-      >
+      <Container height="100%" width="350px" position="relative">
         <Carousel
           showThumbs={false}
           showIndicators={false}

@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 
-export class PlusIcon extends Component {
+interface Props {
+  width?: string;
+  heigth?: string;
+}
+export class PlusIcon extends Component<Props> {
+  static defaultProps: Props = {
+    width: "24",
+    heigth: "24",
+  };
   render() {
     return (
       <svg
-        width="24"
-        height="24"
+        width={this.props.width}
+        height={this.props.heigth}
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

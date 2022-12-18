@@ -7,6 +7,7 @@ import { theme } from "../config/theme";
 import type { RootState } from "../store/store";
 import type { Product } from "../config/types";
 import { connect } from "react-redux";
+import { computeTotalQuantity } from "../config/utils";
 
 interface Props {
   cartProducts: Product[];
@@ -17,6 +18,7 @@ interface Props {
 
 class CartPage extends Component<Props> {
   render() {
+    const totalQuantity = computeTotalQuantity(this.props.cartProducts);
     return (
       <Container justifyContent="center">
         <Container width="90%" flexDirection="column" paddingBottom="50px">
@@ -44,6 +46,7 @@ class CartPage extends Component<Props> {
                 height="350px"
               >
                 <CartItemCard
+                  id={product.id}
                   brandName={product.brand}
                   attributes={product.attributes}
                   productName={product.name}
@@ -75,7 +78,7 @@ class CartPage extends Component<Props> {
                 fontSize={theme.fontSize.l}
                 fontWeight={theme.fontWeight.bold}
               >
-                3
+                {totalQuantity}
               </Typography>
             </Container>
             <Container gap="10px">
@@ -93,7 +96,11 @@ class CartPage extends Component<Props> {
                 {this.props.totalPrice}
               </Typography>
             </Container>
-            <Button bg={theme.colors.secondaryText} pV="10px">
+            <Button
+              bg={theme.colors.secondaryText}
+              pV="10px"
+              onClick={() => console.log("place order for products")}
+            >
               <Typography
                 textTransform="uppercase"
                 color={theme.colors.primaryBackground}

@@ -90,3 +90,14 @@ export const segragateProductsToCategories = (productsArray: Product[]) => {
     tech: techArray,
   };
 };
+
+export const computeTotalQuantity = (productsArray: Product[]) => {
+  let quantity: number[] = [];
+  productsArray.forEach((item) => quantity.push(item.quantity));
+
+  const totalQuantity = quantity.reduce(
+    (accumulator, quantity) => accumulator + quantity,
+    0
+  );
+  return totalQuantity;
+};

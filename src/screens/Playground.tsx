@@ -11,7 +11,7 @@ import Header from "../components/header/Header";
 import { NavBar } from "../components/header/NavBar";
 import ProductCard from "../components/ProductCard";
 import { DUMMY_SIZES, DUMMY_COLORS } from "../config/utils";
-import { ProductDescriptionPage } from "../pages/ProductDescriptionPage";
+import ProductDescriptionPage from "../pages/ProductDescriptionPage";
 import { CartModal } from "../components/cart/CartModal";
 import { CartItemCarousel } from "../components/cart/CartItemCarousel";
 

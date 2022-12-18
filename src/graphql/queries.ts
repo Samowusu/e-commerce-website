@@ -6,6 +6,7 @@ export const FETCH_CATEGORIES = gql`
       products {
         id
         name
+        description
         brand
         attributes {
           id

@@ -17,7 +17,7 @@ import CurrencySwitcherCard from "./components/CurrencySwitcherCard";
 import { FETCH_CATEGORIES } from "./graphql/queries";
 import { graphql } from "@apollo/react-hoc";
 import { Query } from "@apollo/react-components";
-import { ProductDescriptionPage } from "./pages/ProductDescriptionPage";
+import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import { Circles } from "react-loader-spinner";
 
 const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);

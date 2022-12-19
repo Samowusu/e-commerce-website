@@ -7,6 +7,7 @@ import CartItemCard from "./CartItemCard";
 import { Button } from "../commons/Button";
 import type { RootState } from "../../store/store";
 import type { Product } from "../../config/types";
+import { computeTotalQuantity } from "../../config/utils";
 import { connect } from "react-redux";
 import { initialProduct } from "../../store/cartSlice";
 
@@ -29,15 +30,16 @@ class CartOverlay extends Component<Props> {
   };
 
   render() {
-    const bagDescription =
-      this.props.cartProducts.length === 1 ? "item" : "items";
+    const totalQuantity = computeTotalQuantity(this.props.cartProducts);
+
+    const bagDescription = totalQuantity === 1 ? "item" : "items";
     return (
       <Container padding="10px" maxWidth="350px">
         <Container width="100%" flexDirection="column">
           <Container gap="5px" marginBottom="25px">
             <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
             <Typography>
-              {this.props.cartProducts.length} {bagDescription}
+              {totalQuantity} {bagDescription}
             </Typography>
           </Container>
           <Container

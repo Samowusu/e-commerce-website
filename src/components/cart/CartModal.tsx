@@ -36,12 +36,15 @@ export class CartModal extends Component<Props> {
           content: {
             ...customStyles.content,
             position: "absolute",
+            zIndex: "500",
             top: "0px",
             left: "65%",
           },
           overlay: {
             ...customStyles.overlay,
             position: "fixed",
+            zIndex: "500",
+
             top: `${headerHeight}`,
           },
         }}

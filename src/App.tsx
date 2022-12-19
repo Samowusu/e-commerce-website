@@ -131,6 +131,15 @@ class App extends Component<Props, States> {
               path="/"
               element={
                 <CategoryPage
+                  categoryName="all"
+                  products={data.category?.products}
+                />
+              }
+            />
+            <Route
+              path="/clothes"
+              element={
+                <CategoryPage
                   categoryName="clothes"
                   products={segregatedProducts.clothes}
                 />
@@ -145,7 +154,8 @@ class App extends Component<Props, States> {
                 />
               }
             />
-            <Route path="/:id" element={<ProductDescriptionPage />} />
+            <Route path="/clothes/:id" element={<ProductDescriptionPage />} />
+
             <Route path="/tech/:id" element={<ProductDescriptionPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route

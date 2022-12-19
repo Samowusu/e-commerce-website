@@ -12,7 +12,22 @@ interface Props {
   title: string;
   type: string;
 }
-export class AttributeDisplay extends Component<Props> {
+
+interface States {
+  isSelected: boolean;
+}
+export class AttributeDisplay extends Component<Props, States> {
+  state: Readonly<States> = {
+    isSelected: false,
+  };
+
+  handleSelectAttribute = () => {
+    this.setState((prevState) => {
+      return {
+        isSelected: !prevState.isSelected,
+      };
+    });
+  };
   render() {
     return (
       <Container flexDirection="column" gap="5px">
@@ -36,16 +51,31 @@ export class AttributeDisplay extends Component<Props> {
             <Rectangle
               key={item.id}
               text={this.props.type === "text" ? item.value : ""}
-              color={index === 1 ? "white" : "black"}
+              color={this.state.isSelected ? "white" : "black"}
               background={
                 this.props.type === "text"
-                  ? index === 1
+                  ? this.state.isSelected
                     ? "black"
                     : "white"
                   : item.value
               }
               max={this.props.cartPage ? true : false}
-              border={this.props.type === "text" ? true : false}
+              border={
+                this.props.type === "text"
+                  ? true
+                  : this.state.isSelected
+                  ? true
+                  : false
+              }
+              onClick={this.handleSelectAttribute}
+              borderColor={
+                this.props.type === "text"
+                  ? "black"
+                  : this.state.isSelected
+                  ? `${theme.colors.secondaryText}`
+                  : "black"
+              }
+              borderWidth={this.props.type !== "text" ? "2px" : "1px"}
             />
           ))}
         </Container>

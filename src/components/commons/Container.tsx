@@ -12,6 +12,7 @@ const Box = styled.div<StyleProps>`
   border-left: ${({ borderLeft }) => borderLeft ?? ""};
   border-color: ${({ borderColor }) => borderColor ?? ""};
   border-radius: ${({ borderRadius }) => borderRadius ?? ""};
+  border-width: ${({ borderWidth }) => borderWidth ?? "1px"};
   background: ${({ bg }) => bg ?? "transparent"};
   width: ${({ width }) => width ?? "100%"};
   max-width: ${({ maxWidth }) => maxWidth ?? ""};
@@ -138,6 +139,7 @@ interface Props {
   onClick?: () => void;
   opacity?: string;
   cursor?: string;
+  borderWidth?: string;
 }
 export class Container extends Component<Props> {
   render() {
@@ -189,6 +191,7 @@ export class Container extends Component<Props> {
         onClick={this.props.onClick}
         opacity={this.props.opacity}
         cursor={this.props.cursor}
+        borderWidth={this.props.borderWidth}
       >
         {this.props.children}
       </Box>

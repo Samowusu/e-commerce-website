@@ -79,7 +79,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
     const productPrice = prices[this.props.currencyIndex].amount;
 
     const productDescriptionPageUrl =
-      category === "clothes" ? `/${id}` : `/tech/${id}`;
+      category === "clothes" ? `/clothes/${id}` : `/tech/${id}`;
     return (
       <Container
         width="300px"

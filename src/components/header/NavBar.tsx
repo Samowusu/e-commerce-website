@@ -58,6 +58,21 @@ export class NavBar extends Component {
                   : {};
               }}
             >
+              ALL
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/clothes"}
+              style={({ isActive }) => {
+                return isActive
+                  ? {
+                      color: theme.colors.secondaryText,
+                      borderBottom: `3px solid ${theme.colors.secondaryText}`,
+                    }
+                  : {};
+              }}
+            >
               CLOTHES
             </Link>
           </li>

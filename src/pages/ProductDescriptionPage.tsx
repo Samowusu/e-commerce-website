@@ -30,6 +30,7 @@ interface Props {
   currencyIndex: number;
   dispatch?: AppDispatch;
 }
+
 class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
   static defaultProps: Props = {
     brandName: "apollo",

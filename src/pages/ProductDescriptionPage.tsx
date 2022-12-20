@@ -16,6 +16,7 @@ import {
 import { AttributeDisplay } from "../components/cart/AttributeDisplay";
 import { withRouter, WithRouterProps } from "../hocs/withRouter";
 import { connect } from "react-redux";
+import ReactHtmlParser from "react-html-parser";
 
 // type Pageprops = RouteComponentProps<TypeProps>;
 // class Page02 extends React.Component<Page02Props, TypeState> {
@@ -176,7 +177,7 @@ class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
                   </Typography>
                 </Button>
                 <Typography lineHeight="24px" textTransform="none">
-                  {productDetails.description}
+                  {ReactHtmlParser(productDetails.description)}
                 </Typography>
               </Container>
             </Container>

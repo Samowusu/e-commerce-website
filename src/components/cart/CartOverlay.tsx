@@ -34,9 +34,9 @@ class CartOverlay extends Component<Props> {
 
     const bagDescription = totalQuantity === 1 ? "item" : "items";
     return (
-      <Container padding="10px" maxWidth="350px">
+      <Container padding="10px" maxWidth="350px" minWidth="300px">
         <Container width="100%" flexDirection="column">
-          <Container gap="5px" marginBottom="25px">
+          <Container gap="5px" paddingBottom="5px">
             <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
             <Typography>
               {totalQuantity} {bagDescription}
@@ -45,13 +45,14 @@ class CartOverlay extends Component<Props> {
           <Container
             flexDirection="column"
             gap="30px"
-            marginBottom="25px"
             maxHeight="350px"
+            pV="5px"
             overflow="auto"
           >
-            {this.props.cartProducts.map((product) => (
+            {this.props.cartProducts.map((product, index) => (
               <CartItemCard
                 key={product.id}
+                productIndex={index}
                 id={product.id}
                 brandName={product.brand}
                 attributes={product.attributes}
@@ -66,52 +67,56 @@ class CartOverlay extends Component<Props> {
               />
             ))}
           </Container>
-          <Container justifyContent="space-between">
-            <Typography fontWeight={theme.fontWeight.medium}>Total</Typography>
-            <Typography fontWeight={theme.fontWeight.bold}>
-              {this.props.currency}
-              {this.props.totalPrice}
-            </Typography>
-          </Container>
-          <Container marginTop="40px" justifyContent="space-between">
-            <Link
-              to={"/cart"}
-              style={{
-                width: "48%",
-                height: "auto",
-              }}
-            >
+          <Container flexDirection="column" paddingTop="5px">
+            <Container justifyContent="space-between">
+              <Typography fontWeight={theme.fontWeight.medium}>
+                Total
+              </Typography>
+              <Typography fontWeight={theme.fontWeight.bold}>
+                {this.props.currency}
+                {this.props.totalPrice}
+              </Typography>
+            </Container>
+            <Container marginTop="40px" justifyContent="space-between">
+              <Link
+                to={"/cart"}
+                style={{
+                  width: "48%",
+                  height: "auto",
+                }}
+              >
+                <Button
+                  pV="15px"
+                  border
+                  borderColor={theme.colors.primaryText}
+                  onClick={this.props.onCloseModal}
+                >
+                  <Typography
+                    textTransform="uppercase"
+                    fontSize={theme.fontSize.vs}
+                    fontWeight={theme.fontWeight.semiBold}
+                  >
+                    View Bag
+                  </Typography>
+                </Button>
+              </Link>
               <Button
+                width="48%"
                 pV="15px"
-                borderColor={theme.colors.primaryText}
-                border
-                onClick={this.props.onCloseModal}
+                bg={theme.colors.secondaryText}
+                borderColor={theme.colors.secondaryText}
+                onClick={this.props.onCheckout}
               >
                 <Typography
                   textTransform="uppercase"
                   fontSize={theme.fontSize.vs}
                   fontWeight={theme.fontWeight.semiBold}
+                  color={theme.colors.primaryBackground}
                 >
-                  View Bag
+                  check out
                 </Typography>
               </Button>
-            </Link>
-            <Button
-              width="48%"
-              pV="15px"
-              bg={theme.colors.secondaryText}
-              borderColor={theme.colors.secondaryText}
-              onClick={this.props.onCheckout}
-            >
-              <Typography
-                textTransform="uppercase"
-                fontSize={theme.fontSize.vs}
-                fontWeight={theme.fontWeight.semiBold}
-                color={theme.colors.primaryBackground}
-              >
-                check out
-              </Typography>
-            </Button>
+            </Container>
           </Container>
         </Container>
       </Container>

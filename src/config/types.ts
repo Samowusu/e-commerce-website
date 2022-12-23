@@ -10,11 +10,11 @@ export type Product = {
   brand: string;
   quantity: number;
 };
-
 export type AttributeSet = {
   id: string;
   name: string;
   type: string;
+  selectedItem?: Attribute;
   items: [Attribute];
 };
 

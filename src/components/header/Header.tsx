@@ -10,6 +10,8 @@ import { Button } from "../commons/Button";
 import { DropUpIcon } from "../../assets/svgs/DropUpIcon";
 import type { RootState } from "../../store/store";
 import type { Product } from "../../config/types";
+import { computeTotalQuantity } from "../../config/utils";
+import { initialProduct } from "../../store/cartSlice";
 import { connect } from "react-redux";
 
 interface Props {
@@ -18,7 +20,7 @@ interface Props {
   onCloseCurrencySwitcherCard: () => void;
   showCurrencySwitcherCard: boolean;
   currency?: string;
-  cartItems?: Product[];
+  cartItems: Product[];
   openModal: boolean;
   onCloseCartModal: () => void;
 }
@@ -32,6 +34,7 @@ class Header extends Component<Props> {
     showCurrencySwitcherCard: false,
     openModal: false,
     onCloseCartModal: () => console.log("cart modal closed"),
+    cartItems: [initialProduct],
   };
 
   cartModalHandler = () => {
@@ -45,6 +48,8 @@ class Header extends Component<Props> {
 
   render(): ReactNode {
     console.log(this.props.cartItems);
+    const totalQuantity = computeTotalQuantity(this.props.cartItems);
+
     return (
       <Container
         justifyContent="center"
@@ -100,7 +105,7 @@ class Header extends Component<Props> {
               </Button>
             </Container>
             {/* the container below displays the qty of products */}
-            {this.props.cartItems?.length === 0 ? null : (
+            {totalQuantity === 0 ? null : (
               <Container
                 width="20px"
                 height="20px"
@@ -117,7 +122,7 @@ class Header extends Component<Props> {
                   fontWeight={theme.fontWeight.bold}
                   color={theme.colors.primaryBackground}
                 >
-                  {this.props.cartItems?.length}
+                  {totalQuantity}
                 </Typography>
               </Container>
             )}

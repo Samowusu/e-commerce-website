@@ -35,6 +35,7 @@ export class CartItemCarousel extends Component<Props> {
               bottom="0"
               right="10px"
               zIndex="10"
+              display={this.props.images.length < 2 ? "none" : ""}
             >
               <NextIcon />
             </Button>
@@ -49,6 +50,7 @@ export class CartItemCarousel extends Component<Props> {
               bottom="0"
               right="40px"
               zIndex="10"
+              display={this.props.images.length < 2 ? "none" : ""}
             >
               <PrevIcon />
             </Button>

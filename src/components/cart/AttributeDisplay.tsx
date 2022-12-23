@@ -11,22 +11,30 @@ interface Props {
   productDescription?: boolean;
   title: string;
   type: string;
+  onChange?: (val: number) => void;
+  value?: string;
 }
 
 interface States {
   isSelected: boolean;
+  selectedValue: string;
 }
 export class AttributeDisplay extends Component<Props, States> {
   state: Readonly<States> = {
     isSelected: false,
+    selectedValue: this.props.value ?? this.props.items[0].id,
   };
 
-  handleSelectAttribute = () => {
-    this.setState((prevState) => {
-      return {
-        isSelected: !prevState.isSelected,
-      };
-    });
+  componentDidMount() {
+    const selectedValueIndex = this.props.items.findIndex(
+      (item) => item.id === this.state.selectedValue
+    );
+    this.props.onChange?.(selectedValueIndex);
+  }
+
+  handleSelectAttribute = (id: string, index: number) => {
+    this.setState({ selectedValue: id });
+    this.props.onChange?.(index);
   };
   render() {
     return (
@@ -51,10 +59,10 @@ export class AttributeDisplay extends Component<Props, States> {
             <Rectangle
               key={item.id}
               text={this.props.type === "text" ? item.value : ""}
-              color={this.state.isSelected ? "white" : "black"}
+              color={this.state.selectedValue === item.id ? "white" : "black"}
               background={
                 this.props.type === "text"
-                  ? this.state.isSelected
+                  ? this.state.selectedValue === item.id
                     ? "black"
                     : "white"
                   : item.value
@@ -63,15 +71,19 @@ export class AttributeDisplay extends Component<Props, States> {
               border={
                 this.props.type === "text"
                   ? true
-                  : this.state.isSelected
+                  : this.state.selectedValue === item.id
                   ? true
                   : false
               }
-              onClick={this.handleSelectAttribute}
+              onClick={
+                this.props.productDescription
+                  ? () => this.handleSelectAttribute(item.id, index)
+                  : () => console.log("read only")
+              }
               borderColor={
                 this.props.type === "text"
                   ? "black"
-                  : this.state.isSelected
+                  : this.state.selectedValue === item.id
                   ? `${theme.colors.secondaryText}`
                   : "black"
               }

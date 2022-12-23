@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
 import { theme } from "../config/theme";
@@ -21,37 +21,48 @@ import ReactHtmlParser from "react-html-parser";
 // type Pageprops = RouteComponentProps<TypeProps>;
 // class Page02 extends React.Component<Page02Props, TypeState> {
 interface Props {
-  brandName?: string;
-  productName?: string;
-  sizes?: string[];
-  colors?: string[];
-  price?: string;
-  productDescription?: string;
   currency: string;
   currencyIndex: number;
   dispatch?: AppDispatch;
 }
 
-class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
-  static defaultProps: Props = {
-    brandName: "apollo",
-    productName: "running shorts",
-    sizes: DUMMY_SIZES,
-    colors: DUMMY_COLORS,
-    price: "$50.00",
-    currency: "$",
-    currencyIndex: 0,
-  };
+interface State {
+  productDetails?: Product;
+}
 
+class ProductDescriptionComponent extends Component<
+  WithRouterProps<Props>,
+  State
+> {
   handleAddToCart = (product: AddToCartPayload) => {
     this.props.dispatch && this.props?.dispatch(addToCart(product));
     this.props.dispatch &&
       this.props?.dispatch(computeTotalPrice(product.index));
   };
 
+  handleSelectAttribute = (
+    attributeIndex: number,
+    attributeValueIndex: number
+  ) => {
+    console.log("index", attributeIndex, "valueIndex", attributeValueIndex);
+    let attributes = this.state?.productDetails?.attributes
+      ? [...this.state?.productDetails?.attributes]
+      : [...this.props.location.state.productDetails.attributes];
+    console.log("attributes", attributes);
+    attributes[attributeIndex] = {
+      ...attributes[attributeIndex],
+      selectedItem: attributes[attributeIndex].items[attributeValueIndex],
+    };
+    this.setState({
+      productDetails: {
+        ...this.props.location.state.productDetails,
+        attributes,
+      },
+    });
+  };
+
   render() {
     const { productDetails } = this.props.location.state;
-    console.log(productDetails.inStock);
 
     return (
       <Container justifyContent="center" paddingTop="50px">
@@ -63,15 +74,6 @@ class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
                   <img src={image} alt="a product" />
                 </Container>
               ))}
-              {/* <Container>
-                <img src={shirt} alt="a product" />
-              </Container>
-              <Container>
-                <img src={shirt} alt="a product" />
-              </Container>
-              <Container>
-                <img src={shirt} alt="a product" />
-              </Container> */}
             </Container>
             <Container width="75%" paddingBottom="50px">
               <Container height="465px">
@@ -93,46 +95,22 @@ class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
                 </Typography>
               </Container>
               <Container flexDirection="column" marginTop="30px" gap="15px">
-                {productDetails.attributes.map((attribute: AttributeSet) => (
-                  <AttributeDisplay
-                    key={attribute.id}
-                    title={attribute.name}
-                    type={attribute.type}
-                    items={attribute.items}
-                    cartPage
-                    productDescription
-                  />
-                ))}
-                {/* <Typography
-                  textTransform="uppercase"
-                  fontSize={theme.fontSize.m}
-                  fontWeight={theme.fontWeight.bold}
-                >
-                  size:
-                </Typography>
-                <Container gap="10px" marginTop="5px" marginBottom="20px">
-                  {this.props.sizes?.map((size, index) => (
-                    <Rectangle
-                      key={index}
-                      text={size}
-                      color={index === 1 ? "white" : "black"}
-                      background={index === 1 ? "black" : "white"}
-                      max
+                {productDetails.attributes.map(
+                  (attribute: AttributeSet, index: number) => (
+                    <AttributeDisplay
+                      key={attribute.id}
+                      title={attribute.name}
+                      type={attribute.type}
+                      items={attribute.items}
+                      cartPage
+                      productDescription
+                      onChange={(attributeValueIndex) =>
+                        this.handleSelectAttribute(index, attributeValueIndex)
+                      }
                     />
-                  ))}
-                </Container>
-                <Typography
-                  textTransform="uppercase"
-                  fontSize={theme.fontSize.m}
-                  fontWeight={theme.fontWeight.bold}
-                >
-                  color:
-                </Typography>
-                <Container gap="10px" marginTop="5px" marginBottom="20px">
-                  {this.props.colors?.map((color, index) => (
-                    <Rectangle key={index} border={false} background={color} />
-                  ))}
-                </Container> */}
+                  )
+                )}
+
                 <Container flexDirection="column" gap="15px">
                   <Typography
                     textTransform="uppercase"
@@ -163,8 +141,8 @@ class ProductDescriptionComponent extends Component<WithRouterProps<Props>> {
                       return;
                     }
                     this.handleAddToCart({
-                      product: productDetails,
-                      index: this.props.currencyIndex,
+                      product: this.state.productDetails ?? productDetails,
+                      quantity: 1,
                     });
                   }}
                 >

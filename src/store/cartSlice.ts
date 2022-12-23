@@ -61,13 +61,35 @@ export const cartSlice = createSlice({
       const existingCartItemIndex = state.items.findIndex(
         (item) => item.id === action.payload.product.id
       );
-
+      console.log({ existingCartItemIndex });
       if (existingCartItemIndex === -1) {
         console.log("item doesn't exist");
         state.items.push({
           ...action.payload.product,
           quantity: action.payload.quantity,
         });
+      } else {
+        const changedAttribute = state.items[
+          existingCartItemIndex
+        ].attributes.some((attribute, index) => {
+          console.log("state", attribute.selectedItem?.id);
+          console.log(
+            "action",
+            action.payload.product.attributes[index].selectedItem?.id
+          );
+
+          return (
+            attribute.selectedItem?.id !==
+            action.payload.product.attributes[index].selectedItem?.id
+          );
+        });
+        console.log({ changedAttribute });
+        changedAttribute
+          ? state.items.push({
+              ...action.payload.product,
+              quantity: action.payload.quantity,
+            })
+          : null;
       }
     },
 
@@ -85,32 +107,32 @@ export const cartSlice = createSlice({
       // )
     },
 
-    increaseQuantity: (state, action: PayloadAction<string>) => {
-      const cartProductIndex = state.items.findIndex(
-        (item) => item.id === action.payload
-      );
-      state.items[cartProductIndex] = {
-        ...state.items[cartProductIndex],
-        quantity: state.items[cartProductIndex].quantity + 1,
+    increaseQuantity: (state, action: PayloadAction<number>) => {
+      // const cartProductIndex = state.items.findIndex(
+      //   (item) => item.id === action.payload
+      // );
+      state.items[action.payload] = {
+        ...state.items[action.payload],
+        quantity: state.items[action.payload].quantity + 1,
       };
     },
-    decreaseQuantity: (state, action: PayloadAction<string>) => {
-      const cartProductIndex = state.items.findIndex(
-        (item) => item.id === action.payload
-      );
-      state.items[cartProductIndex] = {
-        ...state.items[cartProductIndex],
-        quantity: state.items[cartProductIndex].quantity - 1,
+    decreaseQuantity: (state, action: PayloadAction<number>) => {
+      // const cartProductIndex = state.items.findIndex(
+      //   (item) => item.id === action.payload
+      // );
+      state.items[action.payload] = {
+        ...state.items[action.payload],
+        quantity: state.items[action.payload].quantity - 1,
       };
     },
 
-    removeItem: (state, action: PayloadAction<string>) => {
+    removeItem: (state, action: PayloadAction<number>) => {
       // const cartProductIndex = state.items.findIndex(
       //   (item) => item.id === action.payload
       // );
       // const existingCartProduct = state.items[cartProductIndex];
       console.log("removing from redux");
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.items = state.items.filter((_, index) => index !== action.payload);
     },
   },
 });

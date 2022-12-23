@@ -37,7 +37,7 @@ class CartPage extends Component<Props> {
             borderLeft="none"
             borderRight="none"
           >
-            {this.props.cartProducts.map((product) => (
+            {this.props.cartProducts.map((product, index) => (
               <Container
                 borderBottom
                 borderColor={theme.colors.ash}
@@ -47,6 +47,7 @@ class CartPage extends Component<Props> {
               >
                 <CartItemCard
                   id={product.id}
+                  productIndex={index}
                   brandName={product.brand}
                   attributes={product.attributes}
                   productName={product.name}

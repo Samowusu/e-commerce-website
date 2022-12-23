@@ -40,6 +40,7 @@ interface Props {
   currencyIndex: number;
   attributes?: AttributeSet[];
   images: string[];
+  productIndex: number;
 }
 class CartItemCard extends Component<Props> {
   static defaultProps: Props = {
@@ -51,15 +52,16 @@ class CartItemCard extends Component<Props> {
     cartPage: false,
     images: [`${shirt}`],
     currencyIndex: 0,
+    productIndex: 0,
   };
 
-  handleIncreaseQuantity = (id: string) => {
+  handleIncreaseQuantity = (id: number) => {
     this.props.dispatch && this.props?.dispatch(increaseQuantity(id));
     this.props.dispatch &&
       this.props?.dispatch(computeTotalPrice(this.props.currencyIndex));
   };
 
-  handleDecreaseQuantity = (id: string) => {
+  handleDecreaseQuantity = (id: number) => {
     this.props.dispatch && this.props?.dispatch(decreaseQuantity(id));
     this.props.dispatch &&
       this.props?.dispatch(computeTotalPrice(this.props.currencyIndex));
@@ -124,6 +126,7 @@ class CartItemCard extends Component<Props> {
                 type={attribute.type}
                 items={attribute.items}
                 cartPage={this.props.cartPage}
+                value={attribute.selectedItem?.id}
               />
             ))}
             {/* <Typography>Size:</Typography>
@@ -153,14 +156,22 @@ class CartItemCard extends Component<Props> {
             alignItems="center"
             width="20%"
           >
-            <Button onClick={() => this.handleIncreaseQuantity(this.props.id)}>
+            <Button
+              onClick={() =>
+                this.handleIncreaseQuantity(this.props.productIndex)
+              }
+            >
               <PlusIcon
                 width={this.props.cartPage ? "100%" : "24"}
                 heigth={this.props.cartPage ? "45" : "24"}
               />
             </Button>
             <Typography>{this.props.quantity}</Typography>
-            <Button onClick={() => this.handleDecreaseQuantity(this.props.id)}>
+            <Button
+              onClick={() =>
+                this.handleDecreaseQuantity(this.props.productIndex)
+              }
+            >
               <MinusIcon
                 width={this.props.cartPage ? "100%" : "24"}
                 heigth={this.props.cartPage ? "45" : "24"}

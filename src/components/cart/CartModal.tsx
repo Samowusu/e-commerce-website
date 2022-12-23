@@ -8,6 +8,7 @@ import { headerHeight } from "../../config/constants";
 const customStyles = {
   content: {
     maxWidth: "350px",
+    minWidth: "300px",
     padding: "0px",
   },
   overlay: {
@@ -58,3 +59,24 @@ export class CartModal extends Component<Props> {
     );
   }
 }
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+//   * {
+//   scrollbar-width: auto;
+//   scrollbar-color: #d6cfd8 #ffffff;
+// }
+
+// /* Chrome, Edge, and Safari */
+// *::-webkit-scrollbar {
+//   width: 7px;
+// }
+
+// *::-webkit-scrollbar-track {
+//   background: #ffffff;
+// }
+
+// *::-webkit-scrollbar-thumb {
+//   background-color: #d6cfd8;
+//   border-radius: 8px;
+//   border: 3px none #ffffff;
+// }

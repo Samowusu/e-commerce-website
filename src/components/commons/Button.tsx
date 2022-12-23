@@ -44,6 +44,7 @@ const CustomButton = styled.button<StyleProps>`
   z-index: ${({ zIndex }) => zIndex ?? ""};
 
   cursor: pointer;
+  display: ${({ display }) => display ?? ""};
 `;
 
 interface Props {
@@ -76,6 +77,7 @@ interface Props {
   right?: string;
   left?: string;
   zIndex?: string;
+  display?: string;
 }
 
 export class Button extends Component<Props> {
@@ -110,6 +112,7 @@ export class Button extends Component<Props> {
         right={this.props.right}
         left={this.props.left}
         zIndex={this.props.zIndex}
+        display={this.props.display}
       >
         {this.props.children}
       </CustomButton>

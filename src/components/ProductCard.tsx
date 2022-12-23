@@ -73,6 +73,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
       gallery,
       name: productName,
       prices,
+      attributes,
     } = this.props.product;
     const image = gallery[0];
     const currencySymbol = prices[this.props.currencyIndex].currency.symbol;
@@ -158,11 +159,15 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             bottom="25%"
             right="20px"
             onClick={() => {
-              this.handleAddToCart({
-                product: { ...this.props.product, quantity: 1 },
-                index: this.props.currencyIndex,
-                quantity: 1,
-              });
+              if (!attributes?.length) {
+                this.handleAddToCart({
+                  product: {
+                    ...this.props.product,
+                    quantity: 1,
+                  },
+                  quantity: 1,
+                });
+              }
             }}
           >
             <GreenCartIcon />

@@ -7,9 +7,11 @@ import CartItemCard from "./CartItemCard";
 import { Button } from "../commons/Button";
 import type { RootState } from "../../store/store";
 import type { Product } from "../../config/types";
-import { computeTotalQuantity } from "../../config/utils";
+import {
+  computeTotalQuantity,
+  DUMMY_INITIAL_PRODUCT,
+} from "../../config/utils";
 import { connect } from "react-redux";
-import { initialProduct } from "../../store/cartSlice";
 
 interface Props {
   cartProducts: Product[];
@@ -23,7 +25,7 @@ class CartOverlay extends Component<Props> {
   static defaultProps: Props = {
     onCheckout: () => console.log("checkout"),
     onCloseModal: () => console.log("cart Modal is closed"),
-    cartProducts: [initialProduct],
+    cartProducts: [DUMMY_INITIAL_PRODUCT],
     totalPrice: 0,
     currencyIndex: 0,
     currency: "$",

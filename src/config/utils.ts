@@ -5,6 +5,40 @@ export const DUMMY_SIZES: string[] = ["xs", "s", "m", "l"];
 
 export const DUMMY_COLORS: string[] = ["grey", "black", "green"];
 
+export const DUMMY_INITIAL_PRODUCT: Product = {
+  id: "123",
+  name: "",
+  inStock: false,
+  gallery: ["something"],
+  description: "",
+  category: "",
+  attributes: [
+    {
+      id: "",
+      name: "",
+      type: "",
+      items: [
+        {
+          id: "",
+          value: "",
+          displayValue: "",
+        },
+      ],
+    },
+  ],
+  prices: [
+    {
+      currency: {
+        label: "",
+        symbol: "",
+      },
+      amount: 4,
+    },
+  ],
+  brand: "",
+  quantity: 1,
+};
+
 export const DUMMY_PRODUCTS: Product[] = [
   {
     quantity: 1,

@@ -25,12 +25,13 @@ export class AttributeDisplay extends Component<Props, States> {
     selectedValue: this.props.value ?? this.props.items[0].id,
   };
 
-  componentDidMount() {
-    const selectedValueIndex = this.props.items.findIndex(
-      (item) => item.id === this.state.selectedValue
-    );
-    this.props.onChange?.(selectedValueIndex);
-  }
+  // componentDidMount() {
+  //   const selectedValueIndex = this.props.items.findIndex(
+  //     (item) => item.id === this.state.selectedValue
+  //   );
+  //   console.log(`${this.props.title} has mounted`, {selectedValueIndex});
+  //   this.props.onChange?.(selectedValueIndex);
+  // }
 
   handleSelectAttribute = (id: string, index: number) => {
     this.setState({ selectedValue: id });

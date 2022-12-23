@@ -10,8 +10,10 @@ import { Button } from "../commons/Button";
 import { DropUpIcon } from "../../assets/svgs/DropUpIcon";
 import type { RootState } from "../../store/store";
 import type { Product } from "../../config/types";
-import { computeTotalQuantity } from "../../config/utils";
-import { initialProduct } from "../../store/cartSlice";
+import {
+  computeTotalQuantity,
+  DUMMY_INITIAL_PRODUCT,
+} from "../../config/utils";
 import { connect } from "react-redux";
 
 interface Props {
@@ -34,7 +36,7 @@ class Header extends Component<Props> {
     showCurrencySwitcherCard: false,
     openModal: false,
     onCloseCartModal: () => console.log("cart modal closed"),
-    cartItems: [initialProduct],
+    cartItems: [DUMMY_INITIAL_PRODUCT],
   };
 
   cartModalHandler = () => {

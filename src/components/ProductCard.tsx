@@ -10,10 +10,10 @@ import type { RootState, AppDispatch } from "../store/store";
 import type { Product } from "../config/types";
 import {
   addToCart,
-  initialProduct,
   AddToCartPayload,
   computeTotalPrice,
 } from "../store/cartSlice";
+import { DUMMY_INITIAL_PRODUCT } from "../config/utils";
 import { connect } from "react-redux";
 
 interface ProductCardState {
@@ -22,17 +22,15 @@ interface ProductCardState {
 
 interface ProductCardProps {
   dispatch?: AppDispatch;
-  // addToCartFn: (product: Product) => void;
   currencyIndex: number;
   product: Product;
 }
 
 class ProductCard extends Component<ProductCardProps, ProductCardState> {
   static defaultProps: ProductCardProps = {
-    // dispatch: (product: Product) => console.log(product),
     currencyIndex: 0,
 
-    product: initialProduct,
+    product: DUMMY_INITIAL_PRODUCT,
   };
 
   state: Readonly<ProductCardState> = {

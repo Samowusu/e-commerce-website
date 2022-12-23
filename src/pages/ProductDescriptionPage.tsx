@@ -34,6 +34,24 @@ class ProductDescriptionComponent extends Component<
   WithRouterProps<Props>,
   State
 > {
+  componentDidMount(): void {
+    const { productDetails } = this.props.location.state;
+    const updatedAttributes = productDetails.attributes.map(
+      (attribute: AttributeSet) => {
+        return {
+          ...attribute,
+          selectedItem: attribute.items[0],
+        };
+      }
+    );
+    this.setState({
+      productDetails: {
+        ...productDetails,
+        attributes: updatedAttributes,
+      },
+    });
+  }
+
   handleAddToCart = (product: AddToCartPayload) => {
     this.props.dispatch && this.props?.dispatch(addToCart(product));
     this.props.dispatch &&

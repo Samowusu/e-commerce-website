@@ -1,46 +1,11 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Product } from "../config/types";
-import { act } from "react-dom/test-utils";
 
 export interface AddToCartPayload {
   product: Product;
-  index: number;
   quantity: number;
 }
-export const initialProduct: Product = {
-  id: "123",
-  name: "",
-  inStock: false,
-  gallery: ["something"],
-  description: "",
-  category: "",
-  attributes: [
-    {
-      id: "",
-      name: "",
-      type: "",
-      items: [
-        {
-          id: "",
-          value: "",
-          displayValue: "",
-        },
-      ],
-    },
-  ],
-  prices: [
-    {
-      currency: {
-        label: "",
-        symbol: "",
-      },
-      amount: 4,
-    },
-  ],
-  brand: "",
-  quantity: 1,
-};
 
 export interface CartState {
   items: Product[];
@@ -57,8 +22,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
-      console.log(action.payload);
-      const existingCartItemIndex = state.items.findIndex(
+      const cart = [...state.items];
+      console.log({ cart });
+      const existingCartItemIndex = cart.findIndex(
         (item) => item.id === action.payload.product.id
       );
       console.log({ existingCartItemIndex });
@@ -69,28 +35,60 @@ export const cartSlice = createSlice({
           quantity: action.payload.quantity,
         });
       } else {
-        const changedAttribute = state.items[
-          existingCartItemIndex
-        ].attributes.some((attribute, index) => {
-          console.log("state", attribute.selectedItem?.id);
-          console.log(
-            "action",
-            action.payload.product.attributes[index].selectedItem?.id
-          );
+        console.log("checking for duplicates...");
+        //shortlist list of items to items that have same id as product from payload
+        const filteredItems = cart.filter(
+          (item) => item.id === action.payload.product.id
+        );
+        console.log({ filteredItems });
+        //[assuming each item had a selectedItem in their attributes] check if selectedItem of attributes from payload are the same as selected item on each existing product
 
-          return (
-            attribute.selectedItem?.id !==
-            action.payload.product.attributes[index].selectedItem?.id
-          );
+        const duplicateItemIndex = filteredItems.findIndex((item) => {
+          let duplicateCount = 0;
+
+          item.attributes.map((attribute, index) => {
+            if (
+              attribute.selectedItem?.id ===
+              action.payload.product.attributes[index].selectedItem?.id
+            ) {
+              duplicateCount++;
+            }
+          });
+          console.log({ duplicateCount, length: item.attributes.length });
+          return duplicateCount === item.attributes.length;
         });
-        console.log({ changedAttribute });
-        changedAttribute
-          ? state.items.push({
-              ...action.payload.product,
-              quantity: action.payload.quantity,
-            })
-          : null;
+
+        console.log({ duplicateItemIndex });
+        if (duplicateItemIndex === -1) {
+          console.log("item doesn't exist");
+          state.items.push({
+            ...action.payload.product,
+            quantity: action.payload.quantity,
+          });
+        }
       }
+      //   const changedAttribute = state.items[
+      //     existingCartItemIndex
+      //   ].attributes.some((attribute, index) => {
+      //     console.log("state", attribute.selectedItem?.id);
+      //     console.log(
+      //       "action",
+      //       action.payload.product.attributes[index].selectedItem?.id
+      //     );
+
+      //     return (
+      //       attribute.selectedItem?.id !==
+      //       action.payload.product.attributes[index].selectedItem?.id
+      //     );
+      //   });
+      //   console.log({ changedAttribute });
+      //   changedAttribute
+      //     ? state.items.push({
+      //         ...action.payload.product,
+      //         quantity: action.payload.quantity,
+      //       })
+      //     : null;
+      // }
     },
 
     computeTotalPrice: (state, action: PayloadAction<number>) => {

@@ -5,11 +5,12 @@ export type Product = {
   gallery: [string];
   description: string;
   category: string;
-  attributes: [AttributeSet];
+  attributes: AttributeSet[];
   prices: [Price];
   brand: string;
   quantity: number;
 };
+
 export type AttributeSet = {
   id: string;
   name: string;

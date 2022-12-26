@@ -1,4 +1,4 @@
-import type { Product } from "./types";
+import type { Product, AttributeSet } from "./types";
 import shirt from "../assets/images/ProductD.png";
 
 export const DUMMY_SIZES: string[] = ["xs", "s", "m", "l"];
@@ -134,4 +134,15 @@ export const computeTotalQuantity = (productsArray: Product[]) => {
     0
   );
   return totalQuantity;
+};
+
+export const setDefaultAttribute = (attributesArray: AttributeSet[]) => {
+  const updatedAttributes = attributesArray.map((attribute) => {
+    return {
+      ...attribute,
+      selectedItem: attribute.items[0],
+    };
+  });
+
+  return updatedAttributes;
 };

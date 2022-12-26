@@ -13,7 +13,7 @@ import {
   AddToCartPayload,
   computeTotalPrice,
 } from "../store/cartSlice";
-import { DUMMY_INITIAL_PRODUCT } from "../config/utils";
+import { DUMMY_INITIAL_PRODUCT, setDefaultAttribute } from "../config/utils";
 import { connect } from "react-redux";
 
 interface ProductCardState {
@@ -79,6 +79,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
 
     const productDescriptionPageUrl =
       category === "clothes" ? `/clothes/${id}` : `/tech/${id}`;
+
     return (
       <Container
         width="300px"
@@ -157,15 +158,14 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             bottom="25%"
             right="20px"
             onClick={() => {
-              if (!attributes?.length) {
-                this.handleAddToCart({
-                  product: {
-                    ...this.props.product,
-                    quantity: 1,
-                  },
-                  quantity: 1,
-                });
-              }
+              this.handleAddToCart({
+                // product: this.props.product,
+                product: {
+                  ...this.props.product,
+                  attributes: setDefaultAttribute(attributes),
+                },
+                quantity: 1,
+              });
             }}
           >
             <GreenCartIcon />

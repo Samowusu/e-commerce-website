@@ -1,9 +1,7 @@
 import { Component, ReactNode } from "react";
 import { GlobalStyles } from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
-import { Typography } from "./components/commons/Typography";
 import { theme } from "./config/theme";
-import { Glossary } from "./screens/playground/Glossary";
 import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
 import { CategoryPage } from "./pages/CategoryPage";
@@ -11,12 +9,10 @@ import CartPage from "./pages/CartPage";
 import { Container } from "./components/commons/Container";
 import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
-import type { Product } from "./config/types";
 import { segragateProductsToCategories } from "./config/utils";
 import CurrencySwitcherCard from "./components/CurrencySwitcherCard";
 import { FETCH_CATEGORIES } from "./graphql/queries";
 import { graphql } from "@apollo/react-hoc";
-import { Query } from "@apollo/react-components";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import { Circles } from "react-loader-spinner";
 
@@ -57,7 +53,6 @@ class App extends Component<Props, States> {
   };
 
   render(): ReactNode {
-    // return <Glossary />;
     const data = (this.props as any).data;
 
     if (data.loading) {

@@ -28,6 +28,7 @@ export const cartSlice = createSlice({
         (item) => item.id === action.payload.product.id
       );
       console.log({ existingCartItemIndex });
+      //add to cart if product isn't already present
       if (existingCartItemIndex === -1) {
         console.log("item doesn't exist");
         state.items.push({
@@ -41,7 +42,9 @@ export const cartSlice = createSlice({
           (item) => item.id === action.payload.product.id
         );
         console.log({ filteredItems });
-        //[assuming each item had a selectedItem in their attributes] check if selectedItem of attributes from payload are the same as selected item on each existing product
+        //[assuming each item had a selectedItem in their attributes]
+        // check if selectedItem of attributes from payload are the same as
+        // selected item on each existing product
 
         const duplicateItemIndex = filteredItems.findIndex((item) => {
           let duplicateCount = 0;
@@ -67,28 +70,6 @@ export const cartSlice = createSlice({
           });
         }
       }
-      //   const changedAttribute = state.items[
-      //     existingCartItemIndex
-      //   ].attributes.some((attribute, index) => {
-      //     console.log("state", attribute.selectedItem?.id);
-      //     console.log(
-      //       "action",
-      //       action.payload.product.attributes[index].selectedItem?.id
-      //     );
-
-      //     return (
-      //       attribute.selectedItem?.id !==
-      //       action.payload.product.attributes[index].selectedItem?.id
-      //     );
-      //   });
-      //   console.log({ changedAttribute });
-      //   changedAttribute
-      //     ? state.items.push({
-      //         ...action.payload.product,
-      //         quantity: action.payload.quantity,
-      //       })
-      //     : null;
-      // }
     },
 
     computeTotalPrice: (state, action: PayloadAction<number>) => {

@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
-import { headerHeight } from "../config/constants";
 import { CURRENCIES } from "../config/utils";
 import { theme } from "../config/theme";
 import type { RootState, AppDispatch } from "../store/store";
@@ -52,27 +51,6 @@ class CurrencySwitcherCard extends Component<Props> {
             <Typography>{price.currency.label}</Typography>
           </Container>
         ))}
-
-        {/* <Container
-          gap="10px"
-          pV="8px"
-          paddingLeft="10px"
-          hover
-          onClick={() => this.selectCurrencyHandler("€")}
-        >
-          <Typography>€</Typography>
-          <Typography>EUR</Typography>
-        </Container>
-        <Container
-          gap="10px"
-          pV="8px"
-          paddingLeft="10px"
-          hover
-          onClick={() => this.selectCurrencyHandler("¥")}
-        >
-          <Typography>¥</Typography>
-          <Typography>JPY</Typography>
-        </Container> */}
       </Container>
     );
   }

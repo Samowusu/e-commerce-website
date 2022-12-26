@@ -1,11 +1,8 @@
-import React, { Component, createRef } from "react";
+import { Component } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
 import { theme } from "../config/theme";
-import shirt from "../assets/images/ProductD.png";
-import { DUMMY_COLORS, DUMMY_SIZES } from "../config/utils";
-import type { AttributeSet } from "../config/types";
-import { Rectangle } from "../components/commons/Rectangle";
+import type { AttributeSet, Product } from "../config/types";
 import { Button } from "../components/commons/Button";
 import type { RootState, AppDispatch } from "../store/store";
 import {
@@ -18,8 +15,6 @@ import { withRouter, WithRouterProps } from "../hocs/withRouter";
 import { connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
 
-// type Pageprops = RouteComponentProps<TypeProps>;
-// class Page02 extends React.Component<Page02Props, TypeState> {
 interface Props {
   currency: string;
   currencyIndex: number;
@@ -55,18 +50,16 @@ class ProductDescriptionComponent extends Component<
   handleAddToCart = (product: AddToCartPayload) => {
     this.props.dispatch && this.props?.dispatch(addToCart(product));
     this.props.dispatch &&
-      this.props?.dispatch(computeTotalPrice(product.index));
+      this.props?.dispatch(computeTotalPrice(this.props.currencyIndex));
   };
 
   handleSelectAttribute = (
     attributeIndex: number,
     attributeValueIndex: number
   ) => {
-    console.log("index", attributeIndex, "valueIndex", attributeValueIndex);
     let attributes = this.state?.productDetails?.attributes
       ? [...this.state?.productDetails?.attributes]
       : [...this.props.location.state.productDetails.attributes];
-    console.log("attributes", attributes);
     attributes[attributeIndex] = {
       ...attributes[attributeIndex],
       selectedItem: attributes[attributeIndex].items[attributeValueIndex],

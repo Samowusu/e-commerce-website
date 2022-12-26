@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import CartItemCard from "../components/cart/CartItemCard";
 import { Button } from "../components/commons/Button";
 import { Container } from "../components/commons/Container";
@@ -8,6 +8,7 @@ import type { RootState } from "../store/store";
 import type { Product } from "../config/types";
 import { connect } from "react-redux";
 import { computeTotalQuantity } from "../config/utils";
+import { withRouter, WithRouterProps } from "../hocs/withRouter";
 
 interface Props {
   cartProducts: Product[];
@@ -16,7 +17,12 @@ interface Props {
   currencyIndex: number;
 }
 
-class CartPage extends Component<Props> {
+class CartPageComponent extends Component<WithRouterProps<Props>> {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.cartProducts.length === 1) {
+      this.props.navigate("/");
+    }
+  }
   render() {
     const totalQuantity = computeTotalQuantity(this.props.cartProducts);
     return (
@@ -125,5 +131,7 @@ const mapStateToProps = (state: RootState) => {
     currencyIndex: state.currencySlice.currencyIndex,
   };
 };
+
+const CartPage = withRouter<Props>(CartPageComponent);
 
 export default connect(mapStateToProps)(CartPage);

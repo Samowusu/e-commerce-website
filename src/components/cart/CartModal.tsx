@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { theme } from "../../config/theme";
-import { Container } from "../commons/Container";
 import Modal from "react-modal";
 import CartOverlay from "./CartOverlay";
 import { headerHeight } from "../../config/constants";
@@ -59,24 +58,3 @@ export class CartModal extends Component<Props> {
     );
   }
 }
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
-//   * {
-//   scrollbar-width: auto;
-//   scrollbar-color: #d6cfd8 #ffffff;
-// }
-
-// /* Chrome, Edge, and Safari */
-// *::-webkit-scrollbar {
-//   width: 7px;
-// }
-
-// *::-webkit-scrollbar-track {
-//   background: #ffffff;
-// }
-
-// *::-webkit-scrollbar-thumb {
-//   background-color: #d6cfd8;
-//   border-radius: 8px;
-//   border: 3px none #ffffff;
-// }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "../commons/Container";
 import { Typography } from "../commons/Typography";
@@ -31,6 +31,11 @@ class CartOverlay extends Component<Props> {
     currency: "$",
   };
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.cartProducts.length === 1) {
+      this.props.onCloseModal?.();
+    }
+  }
   render() {
     const totalQuantity = computeTotalQuantity(this.props.cartProducts);
 

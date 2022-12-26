@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { ShopIcon } from "../../assets/svgs/ShopIcon";
 import { Container } from "../commons/Container";
 import { NavBar } from "./NavBar";
@@ -49,7 +49,6 @@ class Header extends Component<Props> {
   };
 
   render(): ReactNode {
-    console.log(this.props.cartItems);
     const totalQuantity = computeTotalQuantity(this.props.cartItems);
 
     return (

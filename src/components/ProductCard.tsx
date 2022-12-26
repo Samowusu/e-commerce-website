@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 import { Button } from "./commons/Button";
-import shirt from "../assets/images/ProductD.png";
 import { GreenCartIcon } from "../assets/svgs/GreenCartIcon";
 import { theme } from "../config/theme";
 import { Link } from "react-router-dom";
@@ -108,7 +107,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
                 justifyContent="center"
                 position="absolute"
                 top="50%"
-                zIndex="100"
+                zIndex="1"
               >
                 <Typography
                   textTransform="uppercase"
@@ -153,13 +152,12 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
           <Button
             width="fit-content"
             height="fit-content"
-            zIndex="200"
+            zIndex="10"
             position="absolute"
             bottom="25%"
             right="20px"
             onClick={() => {
               this.handleAddToCart({
-                // product: this.props.product,
                 product: {
                   ...this.props.product,
                   attributes: setDefaultAttribute(attributes),
@@ -182,7 +180,4 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch: AppDispatch) => ({
-//   addToCartFn: () => dispatch(addToCart),
-// });
 export default connect(mapStateToProps)(ProductCard);

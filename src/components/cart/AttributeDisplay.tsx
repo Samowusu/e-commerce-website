@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Typography } from "../commons/Typography";
 import { Container } from "../commons/Container";
 import { Rectangle } from "../commons/Rectangle";
@@ -24,14 +24,6 @@ export class AttributeDisplay extends Component<Props, States> {
     isSelected: false,
     selectedValue: this.props.value ?? this.props.items[0].id,
   };
-
-  // componentDidMount() {
-  //   const selectedValueIndex = this.props.items.findIndex(
-  //     (item) => item.id === this.state.selectedValue
-  //   );
-  //   console.log(`${this.props.title} has mounted`, {selectedValueIndex});
-  //   this.props.onChange?.(selectedValueIndex);
-  // }
 
   handleSelectAttribute = (id: string, index: number) => {
     this.setState({ selectedValue: id });

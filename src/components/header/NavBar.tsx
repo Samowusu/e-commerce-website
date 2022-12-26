@@ -1,16 +1,14 @@
-import React, { Component } from "react";
-import { Typography } from "../commons/Typography";
+import { Component } from "react";
 import { theme } from "../../config/theme";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+
 const Nav = styled.nav`
-  /* border: 1px solid black; */
   width: clamp(250px, 30%, 300px);
   padding: 0px 10px;
 `;
 
 const UL = styled.ul`
-  /* border: 1px solid blue; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -21,7 +19,6 @@ const UL = styled.ul`
 const Link = styled(NavLink).attrs((props) => ({
   style: props.style,
 }))`
-  /* border: 1px solid green; */
   text-decoration: none;
   display: flex;
   flex-direction: column;

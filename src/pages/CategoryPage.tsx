@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
 import ProductCard from "../components/ProductCard";
@@ -26,12 +26,6 @@ export class CategoryPage extends Component<CategoryProps> {
             {this.props.products?.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
           </Container>
         </Container>
       </Container>

@@ -1,6 +1,6 @@
 # Project Title
 
-E-commerce
+E-commerce Website
 
 ## Table of Content:
 
@@ -9,6 +9,7 @@ E-commerce
 - [Technologies](#technologies)
 - [Folder Structure](#folder-structure)
 - [Getting Started](#getting-started)
+- [Launching GraphQL Endpoint](#launching-graphql-endpoint)
 
 ## About The App
 
@@ -37,8 +38,6 @@ Designs [Figma](<https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Fronte
   - [**graphql**](src/graphql)
   - [**hocs**](src/hocs)
   - [**pages**](src/pages)
-  - [**screens**](src/screens)
-    - [**playground**](src/screens/playground)
   - [**store**](src/store)
 
 ## Getting Started
@@ -46,3 +45,9 @@ Designs [Figma](<https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Fronte
 - download or clone the repository via `git clone https://github.com/Samowusu/e-commerce.git`
 - run `npm install` to install dependencies (node version `17.9.0`)
 - run `npm start` to start the application
+- launch the `graphql` endpoint.
+
+## Launching GraphQL Endpoint
+
+- follow the `GraphQL` endpoint [here](https://github.com/scandiweb/junior-react-endpoint) and launch it.
+- the endpoint comes with instructions on how to launch it

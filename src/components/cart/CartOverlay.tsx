@@ -31,8 +31,9 @@ class CartOverlay extends Component<Props> {
     currency: "$",
   };
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.cartProducts.length === 1) {
+  componentDidUpdate() {
+    const cartItems = computeTotalQuantity(this.props.cartProducts);
+    if (cartItems === 0) {
       this.props.onCloseModal?.();
     }
   }

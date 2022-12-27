@@ -18,11 +18,14 @@ interface Props {
 }
 
 class CartPageComponent extends Component<WithRouterProps<Props>> {
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.cartProducts.length === 1) {
+  componentDidUpdate() {
+    const cartItems = computeTotalQuantity(this.props.cartProducts);
+
+    if (cartItems === 0) {
       this.props.navigate("/");
     }
   }
+
   render() {
     const totalQuantity = computeTotalQuantity(this.props.cartProducts);
     return (

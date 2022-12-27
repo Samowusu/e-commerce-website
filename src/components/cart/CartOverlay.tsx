@@ -44,7 +44,7 @@ class CartOverlay extends Component<Props> {
     return (
       <Container padding="10px" maxWidth="350px" minWidth="300px">
         <Container width="100%" flexDirection="column">
-          <Container gap="5px" paddingBottom="5px">
+          <Container gap="5px" paddingBottom="10px">
             <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
             <Typography>
               {totalQuantity} {bagDescription}
@@ -75,7 +75,7 @@ class CartOverlay extends Component<Props> {
               />
             ))}
           </Container>
-          <Container flexDirection="column" paddingTop="5px">
+          <Container flexDirection="column" paddingTop="10px">
             <Container justifyContent="space-between">
               <Typography fontWeight={theme.fontWeight.medium}>
                 Total

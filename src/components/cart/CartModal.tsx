@@ -8,6 +8,7 @@ const customStyles = {
   content: {
     maxWidth: "350px",
     minWidth: "300px",
+    maxHeight: "530px",
     padding: "0px",
   },
   overlay: {

@@ -1,6 +1,6 @@
 # Project Title
 
-E-commerce Website
+Scandiweb E-commerce Website
 
 ## Table of Content:
 

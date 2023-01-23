@@ -71,6 +71,7 @@ class Header extends Component<Props> {
         <Container
           justifyContent="space-between"
           width="90%"
+          maxWidth="1050px"
           paddingRight="60px"
           paddingTop="24px"
           position="relative"

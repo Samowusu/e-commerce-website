@@ -22,7 +22,7 @@ interface Props {
 }
 
 interface State {
-  productDetails?: Product;
+  productDetails: Product;
 }
 
 class ProductDescriptionComponent extends Component<
@@ -152,7 +152,7 @@ class ProductDescriptionComponent extends Component<
                       return;
                     }
                     this.handleAddToCart({
-                      product: this.state.productDetails ?? productDetails,
+                      product: this.state.productDetails,
                       quantity: 1,
                     });
                   }}

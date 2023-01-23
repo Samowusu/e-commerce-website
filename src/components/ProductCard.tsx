@@ -100,7 +100,6 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             boxShadow={this.state.isHovering ? true : false}
             position="relative"
             opacity={inStock ? "" : "0.4"}
-            cursor={inStock ? "pointer" : "not-allowed"}
           >
             {inStock ? null : (
               <Container
@@ -118,10 +117,10 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
                 </Typography>
               </Container>
             )}
-            <Container width="100%" height="250px">
+            <Container width="100%" height="200px">
               <img src={image} alt="a shirt" />
             </Container>
-            <Container flexDirection="column" marginTop="25px" gap={"10px"}>
+            <Container flexDirection="column" mV="10px" gap={"10px"}>
               <Typography
                 fontSize={theme.fontSize.m}
                 fontWeight={theme.fontWeight.light}
@@ -154,8 +153,8 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
             height="fit-content"
             zIndex="10"
             position="absolute"
-            bottom="25%"
-            right="20px"
+            bottom="20%"
+            right="30px"
             onClick={() => {
               this.handleAddToCart({
                 product: {

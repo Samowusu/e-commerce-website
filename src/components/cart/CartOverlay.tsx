@@ -37,10 +37,13 @@ class CartOverlay extends Component<Props> {
       this.props.onCloseModal?.();
     }
   }
+
   render() {
     const totalQuantity = computeTotalQuantity(this.props.cartProducts);
+    console.log({ cp: this.props.cartProducts });
 
     const bagDescription = totalQuantity === 1 ? "item" : "items";
+
     return (
       <Container padding="10px" maxWidth="350px" minWidth="300px">
         <Container width="100%" flexDirection="column">
@@ -59,7 +62,7 @@ class CartOverlay extends Component<Props> {
           >
             {this.props.cartProducts.map((product, index) => (
               <CartItemCard
-                key={product.id}
+                key={product.id + index}
                 productIndex={index}
                 id={product.id}
                 brandName={product.brand}

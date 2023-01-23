@@ -18,7 +18,7 @@ export class CategoryPage extends Component<CategoryProps> {
   render() {
     return (
       <Container justifyContent="center">
-        <Container width="90%" flexDirection="column">
+        <Container width="90%" flexDirection="column" maxWidth="1050px">
           <Typography fontSize={theme.fontSize.xxxl} marginLeft="16px">
             {this.props.categoryName}
           </Typography>

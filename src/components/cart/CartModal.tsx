@@ -10,9 +10,18 @@ const customStyles = {
     minWidth: "300px",
     maxHeight: "530px",
     padding: "0px",
+    border: "none",
+    borderRadius: "0px",
+    top: "0px",
+    right: "10%",
+    left: "auto",
+    zIndex: "500",
   },
   overlay: {
     background: `${theme.colors.modalBackground}`,
+    zIndex: "500",
+
+    top: `${headerHeight}`,
   },
 };
 
@@ -36,17 +45,9 @@ export class CartModal extends Component<Props> {
         style={{
           content: {
             ...customStyles.content,
-            position: "absolute",
-            zIndex: "500",
-            top: "0px",
-            left: "65%",
           },
           overlay: {
             ...customStyles.overlay,
-            position: "fixed",
-            zIndex: "500",
-
-            top: `${headerHeight}`,
           },
         }}
         contentLabel="Cart Modal"

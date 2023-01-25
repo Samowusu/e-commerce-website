@@ -11,10 +11,11 @@ import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
 import { segragateProductsToCategories } from "./config/utils";
 import CurrencySwitcherCard from "./components/CurrencySwitcherCard";
-import { FETCH_CATEGORIES } from "./graphql/queries";
+import { FETCH_CATEGORIES, FETCH_CLOTHES } from "./graphql/queries";
 import { graphql } from "@apollo/react-hoc";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import { Circles } from "react-loader-spinner";
+import ClothesPage from "./pages/ClothesPage";
 
 const withFetchCategoriesQuery = graphql(FETCH_CATEGORIES);
 interface States {
@@ -131,15 +132,7 @@ class App extends Component<Props, States> {
                 />
               }
             />
-            <Route
-              path="/clothes"
-              element={
-                <CategoryPage
-                  categoryName="clothes"
-                  products={segregatedProducts.clothes}
-                />
-              }
-            />
+            <Route path="/clothes" element={<ClothesPage />} />
             <Route
               path="/tech"
               element={

@@ -2,12 +2,16 @@ import { Component } from "react";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 import { CURRENCIES } from "../config/utils";
+import { graphql } from "@apollo/react-hoc";
 
 import type { RootState, AppDispatch } from "../store/store";
 import { changeCurrency, CurrencyState } from "../store/currencySlice";
 import { computeTotalPrice } from "../store/cartSlice";
 import { connect } from "react-redux";
 import { currencySwitcherCardStyles } from "./CurrencySwitcherCardStyles";
+import { FETCH_CURRENCIES } from "../graphql/queries";
+
+const withFetchCurrenciesQuery = graphql(FETCH_CURRENCIES);
 
 interface Props {
   dispatch: AppDispatch;
@@ -43,6 +47,8 @@ class CurrencySwitcherCard extends Component<Props> {
     );
   }
 }
+
+// const WithGraphql = withFetchCurrenciesQuery(CurrencySwitcherCard)
 
 const mapStateToProps = (state: RootState) => {
   return {

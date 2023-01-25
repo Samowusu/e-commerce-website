@@ -15,6 +15,7 @@ import {
   DUMMY_INITIAL_PRODUCT,
 } from "../../config/utils";
 import { connect } from "react-redux";
+import CurrencySwitcherCard from "../CurrencySwitcherCard";
 
 interface Props {
   onCartIconClick: () => void;
@@ -83,6 +84,13 @@ class Header extends Component<Props> {
                   <DropDownIcon />
                 )}
               </Button>
+              {this.props.showCurrencySwitcherCard && (
+                <CurrencySwitcherCard
+                  onCloseCurrencySwitcherCard={
+                    this.props.onCloseCurrencySwitcherCard
+                  }
+                />
+              )}
             </Container>
             {/* the container below displays the qty of products */}
             {totalQuantity === 0 ? null : (

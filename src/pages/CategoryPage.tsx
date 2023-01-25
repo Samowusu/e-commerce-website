@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/product/ProductCard";
 import { DUMMY_PRODUCTS } from "../config/utils";
 import type { Product } from "../config/types";
 import { categoryPageStyles } from "./CategoryPageStyles";

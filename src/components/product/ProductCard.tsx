@@ -1,17 +1,17 @@
 import { Component } from "react";
-import { Container } from "./commons/Container";
-import { Typography } from "./commons/Typography";
-import { Button } from "./commons/Button";
-import { GreenCartIcon } from "../assets/svgs/GreenCartIcon";
+import { Container } from "../commons/Container";
+import { Typography } from "../commons/Typography";
+import { Button } from "../commons/Button";
+import { GreenCartIcon } from "../../assets/svgs/GreenCartIcon";
 import { Link } from "react-router-dom";
-import type { RootState, AppDispatch } from "../store/store";
-import type { Product } from "../config/types";
+import type { RootState, AppDispatch } from "../../store/store";
+import type { Product } from "../../config/types";
 import {
   addToCart,
   AddToCartPayload,
   computeTotalPrice,
-} from "../store/cartSlice";
-import { DUMMY_INITIAL_PRODUCT, setDefaultAttribute } from "../config/utils";
+} from "../../store/cartSlice";
+import { DUMMY_INITIAL_PRODUCT, setDefaultAttribute } from "../../config/utils";
 import { connect } from "react-redux";
 import { productCardStyles } from "./ProductCardStyles";
 

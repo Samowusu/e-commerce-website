@@ -3,11 +3,11 @@ import { theme } from "../config/theme";
 export const currencySwitcherCardStyles = {
   mainContainer: {
     flexDirection: "column",
-    maxWidth: "100px",
-    position: "fixed",
+    width: "100px",
+    position: "absolute",
     zIndex: "200",
-    top: "50px",
-    right: "15%",
+    top: "18px",
+    right: "-75px",
     background: theme.colors.primaryBackground,
     padding: "10px 0",
   },

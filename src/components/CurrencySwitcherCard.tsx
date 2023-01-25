@@ -15,13 +15,13 @@ const withFetchCurrenciesQuery = graphql(FETCH_CURRENCIES);
 
 interface Props {
   dispatch: AppDispatch;
-  onShowCurrencySwitcherCard: () => void;
+  onCloseCurrencySwitcherCard: () => void;
 }
 class CurrencySwitcherCard extends Component<Props> {
   selectCurrencyHandler = (currency: CurrencyState) => {
     this.props.dispatch(changeCurrency(currency));
     this.props.dispatch(computeTotalPrice(currency.currencyIndex));
-    this.props.onShowCurrencySwitcherCard();
+    this.props.onCloseCurrencySwitcherCard();
   };
 
   render() {

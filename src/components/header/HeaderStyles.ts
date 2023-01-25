@@ -30,6 +30,7 @@ export const headerStyles = {
     alignItems: "center",
     width: "auto",
     gap: "10px",
+    position: "relative",
   },
 
   currencyText: {

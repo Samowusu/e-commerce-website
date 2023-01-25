@@ -104,11 +104,7 @@ class App extends Component<Props, States> {
           openModal={this.state.openModal}
           onCloseCartModal={this.closeModalHandler}
         />
-        {this.state.showCurrencySwitcherCard && (
-          <CurrencySwitcherCard
-            onShowCurrencySwitcherCard={this.toggleCurrencySwitcherCardHandler}
-          />
-        )}
+
         <Container
           marginTop={headerHeight}
           pV="50px"

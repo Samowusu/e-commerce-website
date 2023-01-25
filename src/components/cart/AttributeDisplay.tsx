@@ -3,6 +3,7 @@ import { Typography } from "../commons/Typography";
 import { Container } from "../commons/Container";
 import { Rectangle } from "../commons/Rectangle";
 import { theme } from "../../config/theme";
+import { attributeDisplayStyles } from "./AttributeDisplayStyles";
 import type { Attribute } from "../../config/types";
 
 interface Props {
@@ -31,23 +32,15 @@ export class AttributeDisplay extends Component<Props, States> {
   };
   render() {
     return (
-      <Container flexDirection="column" gap="5px">
+      <Container style={attributeDisplayStyles.mainContainer}>
         <Typography
-          textTransform={
-            this.props.productDescription ? "uppercase" : "capitalize"
-          }
-          fontSize={
-            this.props.productDescription ? theme.fontSize.m : theme.fontSize.s
-          }
-          fontWeight={
-            this.props.productDescription
-              ? theme.fontWeight.bold
-              : theme.fontWeight.regular
-          }
+          style={attributeDisplayStyles.attributeTitle(
+            this.props.productDescription!
+          )}
         >
           {this.props.title}:
         </Typography>
-        <Container gap="8px">
+        <Container style={attributeDisplayStyles.rectanglesContainer}>
           {this.props.items?.map((item, index) => (
             <Rectangle
               key={item.id}

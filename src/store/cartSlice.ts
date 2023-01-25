@@ -24,40 +24,26 @@ export const cartSlice = createSlice({
     addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
       console.log({ action });
       const cart = [...state.items];
-      //use selectedItem of each attribute to find existing product with same set of variation and increment quantity if they exist. Add as new item if they dont exist
+      //use selectedItem of each attribute set to find existing product with same set of variation
+      // and increment quantity if they exist. Add as new item if they dont exist
       const perfectMatch = cart.findIndex((item, id) => {
         const foundPerfectMatch =
           item.id === action.payload.product.id &&
-          item.attributes.every((i, _id) => {
-            console.log("filteredItems attribute", {
-              i,
-              item,
-              id,
-              _id,
-              pAtt: action.payload.product.attributes[_id],
-              matches:
-                i.selectedItem ===
-                action.payload.product.attributes[_id].selectedItem,
-            });
+          item.attributes.every((attribute, index) => {
             return (
-              i?.selectedItem?.id ===
-              action?.payload?.product?.attributes[_id]?.selectedItem?.id
+              attribute?.selectedItem?.id ===
+              action?.payload?.product?.attributes[index]?.selectedItem?.id
             );
           });
-        console.log({ foundPerfectMatch });
         return foundPerfectMatch;
       });
-      console.log({ perfectMatch });
 
       if (perfectMatch !== -1) {
-        console.log("found perfect match. incrementing quantity");
-
         state.items[perfectMatch] = {
           ...state.items[perfectMatch],
           quantity: state.items[perfectMatch].quantity + 1,
         };
       } else {
-        console.log("no perfect match exists. adding to cart");
         state.items.push({
           ...action.payload.product,
           quantity: action.payload.quantity,

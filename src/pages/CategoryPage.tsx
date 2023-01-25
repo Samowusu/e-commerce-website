@@ -2,9 +2,9 @@ import { Component } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
 import ProductCard from "../components/ProductCard";
-import { theme } from "../config/theme";
 import { DUMMY_PRODUCTS } from "../config/utils";
 import type { Product } from "../config/types";
+import { categoryPageStyles } from "./CategoryPageStyles";
 
 interface CategoryProps {
   categoryName: string;
@@ -17,12 +17,12 @@ export class CategoryPage extends Component<CategoryProps> {
   };
   render() {
     return (
-      <Container justifyContent="center">
-        <Container width="90%" flexDirection="column" maxWidth="1050px">
-          <Typography fontSize={theme.fontSize.xxxl} marginLeft="16px">
+      <Container style={categoryPageStyles.mainContainer}>
+        <Container style={categoryPageStyles.contentContainer}>
+          <Typography style={categoryPageStyles.categoryNameText}>
             {this.props.categoryName}
           </Typography>
-          <Container flexWrap="wrap" gap="30px" marginTop="50px">
+          <Container style={categoryPageStyles.cardContainer}>
             {this.props.products?.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

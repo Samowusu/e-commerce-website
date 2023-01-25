@@ -22,10 +22,13 @@ const Text = styled.p<StyleProps>`
   margin-bottom: ${({ marginBottom }) => marginBottom ?? ""};
   margin-right: ${({ marginRight }) => marginRight ?? ""};
   margin-left: ${({ marginLeft }) => marginLeft ?? ""};
+  ${({ style }) => style};
 `;
 
 interface Props {
   children: ReactNode;
+  style?: any;
+
   color?: string;
   fontSize?: string;
   fontWeight?: string;
@@ -57,6 +60,7 @@ export class Typography extends Component<Props> {
         mH={this.props.mH}
         mV={this.props.mV}
         margin={this.props.margin}
+        style={this.props.style}
       >
         {this.props.children}
       </Text>

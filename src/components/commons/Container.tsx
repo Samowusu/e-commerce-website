@@ -89,10 +89,13 @@ const Box = styled.div<StyleProps>`
     hover
       ? `&:hover { background: ${theme.colors.lightGrey}  ; cursor: pointer}`
       : ""}
+
+  ${({ style }) => style};
 `;
 
 interface Props {
   children: ReactNode;
+  style?: any;
   width?: string;
   maxWidth?: string;
   minWidth?: string;
@@ -192,6 +195,7 @@ export class Container extends Component<Props> {
         opacity={this.props.opacity}
         cursor={this.props.cursor}
         borderWidth={this.props.borderWidth}
+        style={this.props.style}
       >
         {this.props.children}
       </Box>

@@ -45,10 +45,13 @@ const CustomButton = styled.button<StyleProps>`
 
   cursor: pointer;
   display: ${({ display }) => display ?? ""};
+  ${({ style }) => style};
 `;
 
 interface Props {
   children: ReactNode;
+  style?: any;
+
   bg?: string;
   width?: string;
   height?: string;
@@ -113,6 +116,7 @@ export class Button extends Component<Props> {
         left={this.props.left}
         zIndex={this.props.zIndex}
         display={this.props.display}
+        style={this.props.style}
       >
         {this.props.children}
       </CustomButton>

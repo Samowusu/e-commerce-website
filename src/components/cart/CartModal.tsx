@@ -1,29 +1,7 @@
 import { Component } from "react";
-import { theme } from "../../config/theme";
+import { cartModalStyles } from "./CartModalStyles";
 import Modal from "react-modal";
 import CartOverlay from "./CartOverlay";
-import { headerHeight } from "../../config/constants";
-
-const customStyles = {
-  content: {
-    maxWidth: "350px",
-    minWidth: "300px",
-    maxHeight: "530px",
-    padding: "0px",
-    border: "none",
-    borderRadius: "0px",
-    top: "0px",
-    right: "10%",
-    left: "auto",
-    zIndex: "500",
-  },
-  overlay: {
-    background: `${theme.colors.modalBackground}`,
-    zIndex: "500",
-
-    top: `${headerHeight}`,
-  },
-};
 
 Modal.setAppElement("#root");
 
@@ -44,10 +22,10 @@ export class CartModal extends Component<Props> {
         onRequestClose={this.props.onCloseModal}
         style={{
           content: {
-            ...customStyles.content,
+            ...cartModalStyles.content,
           },
           overlay: {
-            ...customStyles.overlay,
+            ...cartModalStyles.overlay,
           },
         }}
         contentLabel="Cart Modal"

@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Container } from "../components/commons/Container";
 import { Typography } from "../components/commons/Typography";
-import { theme } from "../config/theme";
 import type { AttributeSet, Product } from "../config/types";
 import { Button } from "../components/commons/Button";
 import type { RootState, AppDispatch } from "../store/store";
@@ -14,6 +13,7 @@ import { AttributeDisplay } from "../components/cart/AttributeDisplay";
 import { withRouter, WithRouterProps } from "../hocs/withRouter";
 import { connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
+import { productDescriptionPageStyles } from "./ProductDescriptionPageStyles";
 
 interface Props {
   currency: string;
@@ -76,36 +76,41 @@ class ProductDescriptionComponent extends Component<
     const { productDetails } = this.props.location.state;
 
     return (
-      <Container justifyContent="center" paddingTop="50px">
-        <Container width="90%">
-          <Container justifyContent="space-between" width="50%">
-            <Container flexDirection="column" width="20%" gap="30px">
+      <Container style={productDescriptionPageStyles.mainContainer}>
+        <Container style={productDescriptionPageStyles.contentContainer}>
+          <Container style={productDescriptionPageStyles.imagesContainer}>
+            <div className="custom-scrollbar">
               {productDetails.gallery.map((image: string, index: number) => (
                 <Container key={index}>
                   <img src={image} alt="a product" />
                 </Container>
               ))}
-            </Container>
-            <Container width="75%" paddingBottom="50px">
-              <Container height="465px">
-                <img src={productDetails.gallery[0]} alt="a shirt" />
-              </Container>
+            </div>
+            <Container style={productDescriptionPageStyles.bigImageContainer}>
+              <img src={productDetails.gallery[0]} alt="a shirt" />
             </Container>
           </Container>
-          <Container width="50%" paddingLeft="70px">
-            <Container flexDirection="column" maxWidth="250px">
-              <Container flexDirection="column" gap="10px">
+          <Container style={productDescriptionPageStyles.rightSectionContainer}>
+            <Container
+              style={productDescriptionPageStyles.rightSectionContentContainer}
+            >
+              <Container
+                style={productDescriptionPageStyles.productNameContainer}
+              >
                 <Typography
-                  fontSize={theme.fontSize.xl}
-                  fontWeight={theme.fontWeight.semiBold}
+                  style={productDescriptionPageStyles.productBrandText}
                 >
                   {productDetails.brand}
                 </Typography>
-                <Typography fontSize={theme.fontSize.xl}>
+                <Typography
+                  style={productDescriptionPageStyles.productNameText}
+                >
                   {productDetails.name}
                 </Typography>
               </Container>
-              <Container flexDirection="column" marginTop="30px" gap="15px">
+              <Container
+                style={productDescriptionPageStyles.bottomSectionContainer}
+              >
                 {productDetails.attributes.map(
                   (attribute: AttributeSet, index: number) => (
                     <AttributeDisplay
@@ -122,18 +127,11 @@ class ProductDescriptionComponent extends Component<
                   )
                 )}
 
-                <Container flexDirection="column" gap="15px">
-                  <Typography
-                    textTransform="uppercase"
-                    fontSize={theme.fontSize.m}
-                    fontWeight={theme.fontWeight.bold}
-                  >
+                <Container style={productDescriptionPageStyles.priceContainer}>
+                  <Typography style={productDescriptionPageStyles.priceText}>
                     price:
                   </Typography>
-                  <Typography
-                    fontSize={theme.fontSize.l}
-                    fontWeight={theme.fontWeight.bold}
-                  >
+                  <Typography style={productDescriptionPageStyles.priceAmount}>
                     {
                       productDetails.prices[this.props.currencyIndex].currency
                         .symbol
@@ -142,10 +140,7 @@ class ProductDescriptionComponent extends Component<
                   </Typography>
                 </Container>
                 <Button
-                  bg={theme.colors.secondaryText}
-                  pV="10px"
-                  mV="15px"
-                  maxWidth="240px"
+                  style={productDescriptionPageStyles.addToCartButton}
                   onClick={() => {
                     if (!productDetails.inStock) {
                       alert("sorry! this product is out of stock");
@@ -158,14 +153,14 @@ class ProductDescriptionComponent extends Component<
                   }}
                 >
                   <Typography
-                    textTransform="uppercase"
-                    color={theme.colors.primaryBackground}
-                    fontWeight={theme.fontWeight.semiBold}
+                    style={productDescriptionPageStyles.addToCartText}
                   >
                     add to cart
                   </Typography>
                 </Button>
-                <Typography lineHeight="24px" textTransform="none">
+                <Typography
+                  style={productDescriptionPageStyles.productDescriptionText}
+                >
                   {ReactHtmlParser(productDetails.description)}
                 </Typography>
               </Container>

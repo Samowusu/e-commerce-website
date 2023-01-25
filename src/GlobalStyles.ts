@@ -13,7 +13,12 @@ body {
   font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
+
+
+
+
 a {
   text-decoration: none
 }
@@ -24,6 +29,37 @@ img {
   height: 100%;
   width: 100%
 }
+
+.custom-scrollbar {
+  display:flex;
+  flex-direction: column;
+  width: 20%;
+  gap: 30px;
+  height: 300px;
+  overflow: auto;
+  overflow-x:hidden;
+    //firefox 
+    scrollbar-width: thin;          
+  scrollbar-color: #5ECE7B #fff;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;    
+
+  display:block;
+  border-radius:100vw;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #fff; 
+  border-radius:100vw;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #5ECE7B;    
+  border-radius:100vw;
+}
+
 .carousel  {
   height: 100%
 }
@@ -45,4 +81,6 @@ img {
     display: flex;
     align-items: flex-end;
 }
+
+
 `;

@@ -6,6 +6,7 @@ import shirt from "../../assets/images/ProductD.png";
 import { Button } from "../commons/Button";
 import { NextIcon } from "../../assets/svgs/NextIcon";
 import { PrevIcon } from "../../assets/svgs/PrevIcon";
+import { cartItemCarouselStyles } from "./CartItemCarouselStyles";
 
 interface Props {
   images: string[];
@@ -16,7 +17,7 @@ export class CartItemCarousel extends Component<Props> {
   };
   render() {
     return (
-      <Container height="100%" width="350px" position="relative">
+      <Container style={cartItemCarouselStyles.mainContainer}>
         <Carousel
           showThumbs={false}
           showIndicators={false}
@@ -27,30 +28,21 @@ export class CartItemCarousel extends Component<Props> {
           useKeyboardArrows={true}
           renderArrowNext={(clickHandler) => (
             <Button
-              width="20px"
-              height="20px"
-              bg="black"
               onClick={clickHandler}
-              position="absolute"
-              bottom="0"
-              right="10px"
-              zIndex="10"
-              display={this.props.images.length < 2 ? "none" : ""}
+              style={cartItemCarouselStyles.button(
+                this.props.images.length < 2
+              )}
             >
               <NextIcon />
             </Button>
           )}
           renderArrowPrev={(clickHandler) => (
             <Button
-              width="20px"
-              height="20px"
-              bg="black"
               onClick={clickHandler}
-              position="absolute"
-              bottom="0"
-              right="40px"
-              zIndex="10"
-              display={this.props.images.length < 2 ? "none" : ""}
+              style={{
+                ...cartItemCarouselStyles.button(this.props.images.length < 2),
+                right: "40px",
+              }}
             >
               <PrevIcon />
             </Button>
@@ -58,12 +50,11 @@ export class CartItemCarousel extends Component<Props> {
           infiniteLoop
         >
           {this.props.images.map((image, index) => (
-            <Container key={index} height="100%">
-              <img
-                src={image}
-                alt="the product"
-                style={{ width: "100%", height: "100%", objectFit: "contain" }}
-              />
+            <Container
+              key={index}
+              style={cartItemCarouselStyles.imageContainer}
+            >
+              <img src={image} alt="the product" />
             </Container>
           ))}
         </Carousel>

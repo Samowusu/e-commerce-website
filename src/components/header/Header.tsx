@@ -5,7 +5,7 @@ import { NavBar } from "./NavBar";
 import { DropDownIcon } from "../../assets/svgs/DropDownIcon";
 import { CartIcon } from "../../assets/svgs/CartIcon";
 import { Typography } from "../commons/Typography";
-import { theme } from "../../config/theme";
+import { headerStyles } from "./HeaderStyles";
 import { Button } from "../commons/Button";
 import { DropUpIcon } from "../../assets/svgs/DropUpIcon";
 import type { RootState } from "../../store/store";
@@ -53,11 +53,7 @@ class Header extends Component<Props> {
 
     return (
       <Container
-        justifyContent="center"
-        position="fixed"
-        zIndex="100"
-        top="0"
-        bg={theme.colors.primaryBackground}
+        style={headerStyles.mainContainer}
         onClick={() => {
           if (this.props.showCurrencySwitcherCard) {
             this.props.onCloseCurrencySwitcherCard();
@@ -68,35 +64,17 @@ class Header extends Component<Props> {
           }
         }}
       >
-        <Container
-          justifyContent="space-between"
-          width="90%"
-          maxWidth="1050px"
-          paddingRight="60px"
-          paddingTop="24px"
-          position="relative"
-        >
+        <Container style={headerStyles.contentContainer}>
           <NavBar />
 
           <ShopIcon />
-          <Container
-            width="80px"
-            justifyContent="flex-end"
-            alignItems="center"
-            height="fit-content"
-            gap="10px"
-          >
-            <Container alignItems="center" width="auto" gap="10px">
-              <Typography
-                fontSize={theme.fontSize.m}
-                fontWeight={theme.fontWeight.medium}
-                lineHeight="2px"
-              >
+          <Container style={headerStyles.rightSectionContainer}>
+            <Container style={headerStyles.currencyContainer}>
+              <Typography style={headerStyles.currencyText}>
                 {this.props.currency}
               </Typography>
               <Button
-                width="10px"
-                height="10px"
+                style={headerStyles.dropDownButton}
                 onClick={this.props.onShowCurrencySwitcherCard}
               >
                 {this.props.showCurrencySwitcherCard ? (
@@ -108,30 +86,15 @@ class Header extends Component<Props> {
             </Container>
             {/* the container below displays the qty of products */}
             {totalQuantity === 0 ? null : (
-              <Container
-                width="20px"
-                height="20px"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="50%"
-                bg={theme.colors.black}
-                position="absolute"
-                right="50px"
-                top="15px"
-              >
-                <Typography
-                  fontSize={theme.fontSize.vs}
-                  fontWeight={theme.fontWeight.bold}
-                  color={theme.colors.primaryBackground}
-                >
+              <Container style={headerStyles.totalQuantityContainer}>
+                <Typography style={headerStyles.totalQuantityText}>
                   {totalQuantity}
                 </Typography>
               </Container>
             )}
             <Button
               onClick={this.cartModalHandler}
-              marginLeft="0px"
-              width="auto"
+              style={headerStyles.cartButton}
             >
               <CartIcon />
             </Button>

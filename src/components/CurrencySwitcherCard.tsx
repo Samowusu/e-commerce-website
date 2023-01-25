@@ -2,11 +2,12 @@ import { Component } from "react";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 import { CURRENCIES } from "../config/utils";
-import { theme } from "../config/theme";
+
 import type { RootState, AppDispatch } from "../store/store";
 import { changeCurrency, CurrencyState } from "../store/currencySlice";
 import { computeTotalPrice } from "../store/cartSlice";
 import { connect } from "react-redux";
+import { currencySwitcherCardStyles } from "./CurrencySwitcherCardStyles";
 
 interface Props {
   dispatch: AppDispatch;
@@ -21,24 +22,11 @@ class CurrencySwitcherCard extends Component<Props> {
 
   render() {
     return (
-      <Container
-        flexDirection="column"
-        maxWidth="100px"
-        position="fixed"
-        zIndex="200"
-        top={"50px"}
-        right="8%"
-        bg={theme.colors.primaryBackground}
-        pV="10px"
-        boxShadow
-      >
+      <Container style={currencySwitcherCardStyles.mainContainer} boxShadow>
         {CURRENCIES.map((price, index) => (
           <Container
             key={index}
-            gap="10px"
-            pV="8px"
-            pH="15px"
-            justifyContent="space-between"
+            style={currencySwitcherCardStyles.currencyContainer}
             hover
             onClick={() =>
               this.selectCurrencyHandler({

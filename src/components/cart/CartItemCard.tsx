@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container } from "../commons/Container";
 import { Typography } from "../commons/Typography";
-import { theme } from "../../config/theme";
+import { cartItemCardStyles } from "./CartItemCardStyles";
 import { PlusIcon } from "../../assets/svgs/PlusIcon";
 import { MinusIcon } from "../../assets/svgs/MinusIcon";
 import shirt from "../../assets/images/ProductD.png";
@@ -65,47 +65,20 @@ class CartItemCard extends Component<Props> {
   render() {
     return (
       <Container>
-        <Container width="60%">
-          <Container flexDirection="column" gap="10px">
+        <Container style={cartItemCardStyles.mainContainer}>
+          <Container style={cartItemCardStyles.textsContainer}>
             <Typography
-              fontWeight={
-                this.props.cartPage
-                  ? `${theme.fontWeight.semiBold}`
-                  : `${theme.fontWeight.light}`
-              }
-              fontSize={
-                this.props.cartPage
-                  ? `${theme.fontSize.l}`
-                  : `${theme.fontSize.s}`
-              }
+              style={cartItemCardStyles.brandName(this.props.cartPage!)}
             >
               {this.props.brandName}
             </Typography>
             <Typography
-              fontWeight={
-                this.props.cartPage
-                  ? `${theme.fontWeight.regular}`
-                  : `${theme.fontWeight.light}`
-              }
-              fontSize={
-                this.props.cartPage
-                  ? `${theme.fontSize.l}`
-                  : `${theme.fontSize.s}`
-              }
+              style={cartItemCardStyles.productName(this.props.cartPage!)}
             >
               {this.props.productName}
             </Typography>
             <Typography
-              fontWeight={
-                this.props.cartPage
-                  ? `${theme.fontWeight.bold}`
-                  : `${theme.fontWeight.medium}`
-              }
-              fontSize={
-                this.props.cartPage
-                  ? `${theme.fontSize.m}`
-                  : `${theme.fontSize.s}`
-              }
+              style={cartItemCardStyles.productPrice(this.props.cartPage!)}
             >
               {this.props.currencySymbol}
               {this.props.productPrice}
@@ -122,21 +95,15 @@ class CartItemCard extends Component<Props> {
             ))}
           </Container>
         </Container>
-        <Container gap="5px" width="40%">
-          <Container
-            flexDirection="column"
-            justifyContent="space-between"
-            alignItems="center"
-            width="20%"
-          >
+        <Container style={cartItemCardStyles.buttonsAndImageContainer}>
+          <Container style={cartItemCardStyles.buttonsContainer}>
             <Button
               onClick={() =>
                 this.handleIncreaseQuantity(this.props.productIndex)
               }
             >
               <PlusIcon
-                width={this.props.cartPage ? "100%" : "24"}
-                heigth={this.props.cartPage ? "45" : "24"}
+                dimension={cartItemCardStyles.icons(this.props.cartPage!)}
               />
             </Button>
             <Typography>{this.props.quantity}</Typography>
@@ -146,12 +113,11 @@ class CartItemCard extends Component<Props> {
               }
             >
               <MinusIcon
-                width={this.props.cartPage ? "100%" : "24"}
-                heigth={this.props.cartPage ? "45" : "24"}
+                dimension={cartItemCardStyles.icons(this.props.cartPage!)}
               />
             </Button>
           </Container>
-          <Container width="80%">
+          <Container style={cartItemCardStyles.imageContainer}>
             {this.props.cartPage ? (
               <CartItemCarousel images={this.props.images} />
             ) : (
@@ -165,6 +131,7 @@ class CartItemCard extends Component<Props> {
     );
   }
 }
+
 const mapStateToProps = (state: RootState) => {
   return {
     currencyIndex: state.currencySlice.currencyIndex,

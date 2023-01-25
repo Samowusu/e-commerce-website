@@ -3,7 +3,6 @@ import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 import { Button } from "./commons/Button";
 import { GreenCartIcon } from "../assets/svgs/GreenCartIcon";
-import { theme } from "../config/theme";
 import { Link } from "react-router-dom";
 import type { RootState, AppDispatch } from "../store/store";
 import type { Product } from "../config/types";
@@ -14,6 +13,7 @@ import {
 } from "../store/cartSlice";
 import { DUMMY_INITIAL_PRODUCT, setDefaultAttribute } from "../config/utils";
 import { connect } from "react-redux";
+import { productCardStyles } from "./ProductCardStyles";
 
 interface ProductCardState {
   isHovering: boolean;
@@ -81,65 +81,35 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
 
     return (
       <Container
-        width="300px"
-        justifyContent="center"
-        position="relative"
+        style={productCardStyles.mainContainer}
         onMouseLeave={this.handleMouseLeave}
         onMouseEnter={this.handleMouseEnter}
       >
         <Link
           to={productDescriptionPageUrl}
           state={{ productDetails: this.props.product }}
-          style={{ width: "90%" }}
+          style={productCardStyles.link}
         >
           <Container
-            width="100%"
-            height="100%"
-            flexDirection="column"
-            padding="10px"
+            style={productCardStyles.contentContainer(inStock)}
             boxShadow={this.state.isHovering ? true : false}
-            position="relative"
-            opacity={inStock ? "" : "0.4"}
           >
             {inStock ? null : (
-              <Container
-                justifyContent="center"
-                position="absolute"
-                top="50%"
-                zIndex="1"
-              >
-                <Typography
-                  textTransform="uppercase"
-                  color={theme.colors.faintText}
-                  fontSize={theme.fontSize.l}
-                >
+              <Container style={productCardStyles.outOfStockContainer}>
+                <Typography style={productCardStyles.outOfStockText}>
                   out of stock
                 </Typography>
               </Container>
             )}
-            <Container width="100%" height="200px">
+            <Container style={productCardStyles.imageContainer}>
               <img src={image} alt="a shirt" />
             </Container>
-            <Container flexDirection="column" mV="10px" gap={"10px"}>
-              <Typography
-                fontSize={theme.fontSize.m}
-                fontWeight={theme.fontWeight.light}
-                color={
-                  inStock
-                    ? `${theme.colors.primaryText}`
-                    : `${theme.colors.faintText}`
-                }
-              >
+            <Container style={productCardStyles.productNameContainer}>
+              <Typography style={productCardStyles.productNameText(inStock)}>
                 {productName}
               </Typography>
               <Typography
-                fontSize={theme.fontSize.m}
-                fontWeight={theme.fontWeight.bold}
-                color={
-                  inStock
-                    ? `${theme.colors.primaryText}`
-                    : `${theme.colors.faintText}`
-                }
+                style={productCardStyles.productNameText(inStock, true)}
               >
                 {currencySymbol}
                 {productPrice}
@@ -149,12 +119,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
         </Link>
         {this.state.isHovering && (
           <Button
-            width="fit-content"
-            height="fit-content"
-            zIndex="10"
-            position="absolute"
-            bottom="20%"
-            right="30px"
+            style={productCardStyles.addToCartButton}
             onClick={() => {
               this.handleAddToCart({
                 product: {
@@ -172,6 +137,7 @@ class ProductCard extends Component<ProductCardProps, ProductCardState> {
     );
   }
 }
+
 const mapStateToProps = (state: RootState) => {
   return {
     currency: state.currencySlice.currency,

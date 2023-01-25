@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "../commons/Container";
 import { Typography } from "../commons/Typography";
-import { theme } from "../../config/theme";
+import { cartOverlayStyles } from "./CartOverlayStyles";
 import CartItemCard from "./CartItemCard";
 import { Button } from "../commons/Button";
 import type { RootState } from "../../store/store";
@@ -40,26 +40,21 @@ class CartOverlay extends Component<Props> {
 
   render() {
     const totalQuantity = computeTotalQuantity(this.props.cartProducts);
-    console.log({ cp: this.props.cartProducts });
 
     const bagDescription = totalQuantity === 1 ? "item" : "items";
 
     return (
-      <Container padding="10px" maxWidth="350px" minWidth="300px">
-        <Container width="100%" flexDirection="column">
-          <Container gap="5px" paddingBottom="10px">
-            <Typography fontWeight={theme.fontWeight.bold}>My Bag,</Typography>
+      <Container style={cartOverlayStyles.mainContainer}>
+        <Container style={cartOverlayStyles.contentContainer}>
+          <Container style={cartOverlayStyles.headerContainer}>
+            <Typography style={cartOverlayStyles.headerText}>
+              My Bag,
+            </Typography>
             <Typography>
               {totalQuantity} {bagDescription}
             </Typography>
           </Container>
-          <Container
-            flexDirection="column"
-            gap="30px"
-            maxHeight="350px"
-            pV="5px"
-            overflow="auto"
-          >
+          <Container style={cartOverlayStyles.cartItemsContainer}>
             {this.props.cartProducts.map((product, index) => (
               <CartItemCard
                 key={product.id + index}
@@ -78,52 +73,31 @@ class CartOverlay extends Component<Props> {
               />
             ))}
           </Container>
-          <Container flexDirection="column" paddingTop="10px">
-            <Container justifyContent="space-between">
-              <Typography fontWeight={theme.fontWeight.medium}>
-                Total
-              </Typography>
-              <Typography fontWeight={theme.fontWeight.bold}>
+          <Container style={cartOverlayStyles.footerContainer}>
+            <Container style={cartOverlayStyles.totalPriceContainer}>
+              <Typography style={cartOverlayStyles.totalText}>Total</Typography>
+              <Typography style={cartOverlayStyles.priceText}>
                 {this.props.currency}
                 {this.props.totalPrice}
               </Typography>
             </Container>
-            <Container marginTop="40px" justifyContent="space-between">
-              <Link
-                to={"/cart"}
-                style={{
-                  width: "48%",
-                  height: "auto",
-                }}
-              >
+            <Container style={cartOverlayStyles.buttonsContainer}>
+              <Link to={"/cart"} style={cartOverlayStyles.link}>
                 <Button
-                  pV="15px"
+                  style={cartOverlayStyles.viewBagButton}
                   border
-                  borderColor={theme.colors.primaryText}
                   onClick={this.props.onCloseModal}
                 >
-                  <Typography
-                    textTransform="uppercase"
-                    fontSize={theme.fontSize.vs}
-                    fontWeight={theme.fontWeight.semiBold}
-                  >
+                  <Typography style={cartOverlayStyles.viewBagText}>
                     View Bag
                   </Typography>
                 </Button>
               </Link>
               <Button
-                width="48%"
-                pV="15px"
-                bg={theme.colors.secondaryText}
-                borderColor={theme.colors.secondaryText}
                 onClick={this.props.onCheckout}
+                style={cartOverlayStyles.checkoutButton}
               >
-                <Typography
-                  textTransform="uppercase"
-                  fontSize={theme.fontSize.vs}
-                  fontWeight={theme.fontWeight.semiBold}
-                  color={theme.colors.primaryBackground}
-                >
+                <Typography style={cartOverlayStyles.checkoutText}>
                   check out
                 </Typography>
               </Button>

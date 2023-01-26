@@ -10,13 +10,15 @@ import { computeTotalPrice } from "../store/cartSlice";
 import { connect } from "react-redux";
 import { currencySwitcherCardStyles } from "./CurrencySwitcherCardStyles";
 import { FETCH_CURRENCIES } from "../graphql/queries";
-
-const withFetchCurrenciesQuery = graphql(FETCH_CURRENCIES);
+import { Currency } from "../config/types";
 
 interface Props {
   dispatch: AppDispatch;
   onCloseCurrencySwitcherCard: () => void;
 }
+
+const withFetchCurrenciesQuery = graphql<Props>(FETCH_CURRENCIES);
+
 class CurrencySwitcherCard extends Component<Props> {
   selectCurrencyHandler = (currency: CurrencyState) => {
     this.props.dispatch(changeCurrency(currency));
@@ -25,22 +27,24 @@ class CurrencySwitcherCard extends Component<Props> {
   };
 
   render() {
+    const currencies = (this.props as any).data.currencies;
+
     return (
       <Container style={currencySwitcherCardStyles.mainContainer} boxShadow>
-        {CURRENCIES.map((price, index) => (
+        {currencies?.map((currency: Currency, index: number) => (
           <Container
             key={index}
             style={currencySwitcherCardStyles.currencyContainer}
             hover
             onClick={() =>
               this.selectCurrencyHandler({
-                currency: price.currency.symbol,
+                currency: currency.symbol,
                 currencyIndex: index,
               })
             }
           >
-            <Typography>{price.currency.symbol}</Typography>
-            <Typography>{price.currency.label}</Typography>
+            <Typography>{currency.symbol}</Typography>
+            <Typography>{currency.label}</Typography>
           </Container>
         ))}
       </Container>
@@ -48,12 +52,12 @@ class CurrencySwitcherCard extends Component<Props> {
   }
 }
 
-// const WithGraphql = withFetchCurrenciesQuery(CurrencySwitcherCard)
-
 const mapStateToProps = (state: RootState) => {
   return {
     currency: state.currencySlice.currency,
   };
 };
 
-export default connect(mapStateToProps)(CurrencySwitcherCard);
+export default connect(mapStateToProps)(
+  withFetchCurrenciesQuery(CurrencySwitcherCard)
+);

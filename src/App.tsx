@@ -3,15 +3,13 @@ import { GlobalStyles } from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./config/theme";
 import Header from "./components/header/Header";
-import { Route, Routes } from "react-router-dom";
-import { CategoryPage } from "./pages/CategoryPage";
-import CartPage from "./pages/CartPage";
+
 import { Container } from "./components/commons/Container";
 import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
 
 import { AppRoutes } from "./routes/Routes";
-import { persistor } from "./index";
+// import { persistor } from "./index";
 
 interface States {
   openModal: boolean;
@@ -44,7 +42,6 @@ class App extends Component<Props, States> {
   };
 
   toggleModalHandler = () => {
-    console.log("toggle modal");
     this.setState((prevState) => {
       return {
         openModal: !prevState.openModal,

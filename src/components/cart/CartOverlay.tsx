@@ -44,7 +44,6 @@ class CartOverlay extends Component<Props> {
     const bagDescription = totalQuantity === 1 ? "item" : "items";
 
     const products = this.props.cartProducts;
-    console.log("products array", products);
 
     return (
       <Container style={cartOverlayStyles.mainContainer}>

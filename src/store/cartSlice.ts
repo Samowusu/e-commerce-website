@@ -22,8 +22,8 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
-      console.log({ action });
       const cart = [...state.items];
+
       //use selectedItem of each attribute set to find existing product with same set of variation
       // and increment quantity if they exist. Add as new item if they dont exist
       const perfectMatch = cart.findIndex((item, id) => {

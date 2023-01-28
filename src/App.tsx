@@ -9,7 +9,7 @@ import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
 
 import { AppRoutes } from "./routes/Routes";
-// import { persistor } from "./index";
+import { persistor } from "./index";
 
 interface States {
   openModal: boolean;
@@ -22,12 +22,12 @@ class App extends Component<Props, States> {
     showCurrencySwitcherCard: false,
   };
 
-  // componentDidMount() {
-  //   persistor?.pause();
-  //   persistor.flush().then(() => {
-  //     return persistor.purge();
-  //   });
-  // }
+  componentDidMount() {
+    persistor?.pause();
+    persistor.flush().then(() => {
+      return persistor.purge();
+    });
+  }
 
   toggleCurrencySwitcherCardHandler = () => {
     this.setState((prevState) => {

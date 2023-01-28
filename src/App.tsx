@@ -9,6 +9,7 @@ import { CartModal } from "./components/cart/CartModal";
 import { headerHeight } from "./config/constants";
 
 import { AppRoutes } from "./routes/Routes";
+import { appStyles } from "./AppStyles";
 // import { persistor } from "./index";
 
 interface States {
@@ -67,8 +68,7 @@ class App extends Component<Props, States> {
         />
 
         <Container
-          marginTop={headerHeight}
-          pV="50px"
+          style={appStyles.appContainer}
           onClick={() => {
             if (this.state.showCurrencySwitcherCard) {
               this.closeCurrencySwitcherCardHandler();

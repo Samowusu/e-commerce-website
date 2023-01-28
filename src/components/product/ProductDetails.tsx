@@ -41,7 +41,19 @@ const witchFetchProductDetailsQuery = graphql<Props>(FETCH_PRODUCT_DETAILS, {
 class ProductDetailsComponent extends Component<WithRouterProps<Props>, State> {
   componentDidMount(): void {
     const productDetails = (this.props as any).data.product;
+    this.handleSetDefaultAttribute(productDetails);
+  }
 
+  componentDidUpdate(prevProps: any, prevState: State) {
+    if (
+      prevProps.data.loading !== (this.props as any).data.loading &&
+      !(this.props as any).loading
+    ) {
+      this.handleSetDefaultAttribute((this.props as any).data.product);
+    }
+  }
+
+  handleSetDefaultAttribute = (productDetails: Product) => {
     const updatedAttributes = productDetails?.attributes.map(
       (attribute: AttributeSet) => {
         return {
@@ -56,7 +68,7 @@ class ProductDetailsComponent extends Component<WithRouterProps<Props>, State> {
         attributes: updatedAttributes,
       },
     });
-  }
+  };
 
   handleAddToCart = (product: AddToCartPayload) => {
     this.props.dispatch && this.props?.dispatch(addToCart(product));
@@ -195,11 +207,11 @@ class ProductDetailsComponent extends Component<WithRouterProps<Props>, State> {
                     add to cart
                   </Typography>
                 </Button>
-                <Typography
+                <Container
                   style={productDescriptionPageStyles.productDescriptionText}
                 >
                   {ReactHtmlParser(productDetails?.description)}
-                </Typography>
+                </Container>
               </Container>
             </Container>
           </Container>
